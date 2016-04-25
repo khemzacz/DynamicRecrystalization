@@ -69,5 +69,16 @@ public class Cell {
 			
 	}
 	  
+	public Grain getGrain(){
+		return grain;
+	}
+	
+	public void nullifyGrain(){
+		grain=null;
+	}
+
+	public void setGrain(Grain grain2) {
+		grain=grain2;
+	}
 
 }

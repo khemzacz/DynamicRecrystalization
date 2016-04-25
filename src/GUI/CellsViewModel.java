@@ -143,6 +143,9 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 		for (int i=0;i<height;i++){
 			for (int j = 0;j<width;j++){
 				cell = a.getCellAt(i,j);
+				if(cell.getGrain()!= null)
+					g.setColor(cell.getGrain().getGrainColor());
+				else g.setColor(Color.RED);
 				if(cell.isAlive())
 					g.fillRect(cell.getJ()+j,cell.getI()+i , 2,2);
 			}
@@ -188,6 +191,7 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 		for (Cell cell:cells)
 		{
 			cell.off();
+			cell.nullifyGrain();
 		}
 		repaint();
 		
@@ -214,6 +218,11 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 	public void setNaiveGrainGrowth() {
 		clearTheArea();
 		a.setNaiveGrainGrowth();
+		repaint();
+	}
+
+	public void generateRandomGrains(int value) {
+		a.generateRandomGrains(value);
 	}
 
 	

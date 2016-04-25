@@ -60,6 +60,7 @@ public class MainWindow extends JFrame {
 	private JPanel rightSidePanel;
 	private JScrollBar scrollBar;
 	private JLabel randomGrainsNumber;
+	private JButton generateGrainsBtn;
 	/**
 	 * Create the frame.
 	 */
@@ -196,13 +197,14 @@ public class MainWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String choice = (String)bcScroll.getSelectedItem();
+				String choice = (String)algorythmBox.getSelectedItem();
 				if (choice.equals("GameOfLife")){
 					cellGrid.setGameOfLife();
+					generateGrainsBtn.setEnabled(false);
 				}
 				else if (choice.equals("NaiveGrainGrowth")){
-					
 					cellGrid.setNaiveGrainGrowth();
+					generateGrainsBtn.setEnabled(true);
 				}
 			}
 			
@@ -218,20 +220,32 @@ public class MainWindow extends JFrame {
 		scrollBar.addAdjustmentListener(new AdjustmentListener(){
 			@Override
 			public void adjustmentValueChanged(AdjustmentEvent e) {
-				System.out.println(Integer.toString(scrollBar.getValue()));
 				randomGrainsNumber.setText(Integer.toString(scrollBar.getValue()));
-				
 			}
 		});
 		panel.add(scrollBar);
 		
-		JLabel lblNewLabel = new JLabel("<html>Number of randomly generater grains</html>");
+		JLabel lblNewLabel = new JLabel("<html>Number of randomly generated grains</html>");
 		lblNewLabel.setBounds(0, 174, 124, 34);
 		panel.add(lblNewLabel);
 		
 		randomGrainsNumber = new JLabel("3");
 		randomGrainsNumber.setBounds(130, 185, 43, 16);
 		panel.add(randomGrainsNumber);
+		
+		generateGrainsBtn = new JButton("generateGrains");
+		generateGrainsBtn.setBounds(0, 261, 156, 25);
+		generateGrainsBtn.setEnabled(false);
+		generateGrainsBtn.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mousePressed(MouseEvent e) {
+            	cellGrid.generateRandomGrains(scrollBar.getValue());
+            	cellGrid.clearTheArea();
+            	cellGrid.repaint();
+            }
+			
+		});
+		panel.add(generateGrainsBtn);
 		btnNewButton.addMouseListener(new MouseAdapter(){
 			
             @Override

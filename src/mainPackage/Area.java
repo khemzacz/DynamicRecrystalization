@@ -1,6 +1,10 @@
 package mainPackage;
 
+import java.awt.Color;
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
 
 import Algorythms.GameOfLife;
 import Algorythms.MyAlgorythm;
@@ -261,9 +265,43 @@ public class Area {
 		
 	}
 	
-	public void generateRandomGrains(){
+	public void generateRandomGrains(int n){
+		ArrayList<Point> generated = new ArrayList<Point> ();
+		int j=0, k=0;
+		Point result;
+		Random rand = new Random();
+		Cell cell;
+		Grain grain;
+		for(int i =0;i<n;i++)
+		{
+			System.out.println(i);
+			j = rand.nextInt(height-1);
+			k = rand.nextInt(width-1);
+			result = checkPoint(generated, new Point(j,k),rand);
+			generated.add(result);
+			cell = getCellAt(j, k);
+			grain = new Grain();
+			grain.setIdGrain(i);
+			grain.setGrainColor(new Color(rand.nextInt(255),rand.nextInt(255),rand.nextInt(255)));
+			cell.setGrain(grain);
+			cell.on();
+		}		
+	}
 		
-		
+
+	
+	public Point checkPoint(ArrayList<Point> generated ,Point p, Random rand){
+		int j=0, k = 0 ;
+		for (Point point: generated){
+			if (point.getX()==p.getX() && point.getY()==p.getY()){
+				j = rand.nextInt(height-1);
+				k = rand.nextInt(width-1);
+				return checkPoint(generated, new Point(j,k),rand);
+			}
+			
+			
+		}		
+		return p;
 	}
 	
 }
