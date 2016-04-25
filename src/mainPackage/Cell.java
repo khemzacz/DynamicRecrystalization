@@ -8,13 +8,13 @@ import javax.swing.JPanel;
 import javax.swing.RepaintManager;
 
 public class Cell {
-	boolean alive;
+	private boolean alive;
 	private int i=0; private int j=0;
-	int grain;
+	private Grain grain;
 	
 	public Cell(int i, int j){
 		alive=false;
-		grain=0;
+		grain=null;
 		this.i=i; this.j=j;
 	}
 	
@@ -22,7 +22,14 @@ public class Cell {
 		this.i=cell.i;
 		this.j=cell.j;
 		this.alive = cell.alive;
-		this.grain=cell.grain;
+		this.grain=cell.copyGrain();
+	}
+
+	private Grain copyGrain() {
+		Grain tmp = new Grain();
+		tmp.setGrainColor(this.grain.getGrainColor());
+		tmp.setIdGrain(this.grain.getIdGrain());
+		return tmp;
 	}
 
 	public boolean isAlive(){

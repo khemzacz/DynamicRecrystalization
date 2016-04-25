@@ -203,6 +203,18 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 		
 	}
 
+	public void setNumberOfGrains(int grains){
+		a.setNumberOfGrains(grains);
+	}
+
+	public void setGameOfLife() {
+		
+	}
+
+	public void setNaiveGrainGrowth() {
+		clearTheArea();
+		a.setNaiveGrainGrowth();
+	}
 
 	
 }

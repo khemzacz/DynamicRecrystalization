@@ -198,10 +198,11 @@ public class MainWindow extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				String choice = (String)bcScroll.getSelectedItem();
 				if (choice.equals("GameOfLife")){
-					cellGrid.setPeriodicBC();
+					cellGrid.setGameOfLife();
 				}
 				else if (choice.equals("NaiveGrainGrowth")){
-					cellGrid.setZeroBC();
+					
+					cellGrid.setNaiveGrainGrowth();
 				}
 			}
 			
@@ -217,13 +218,8 @@ public class MainWindow extends JFrame {
 		scrollBar.addAdjustmentListener(new AdjustmentListener(){
 			@Override
 			public void adjustmentValueChanged(AdjustmentEvent e) {
-				int type=e.getAdjustmentType();
-				switch (type){
-					case AdjustmentEvent.UNIT_INCREMENT:
-						randomGrainsNumber.setText(Integer.toString(scrollBar.getValue()));
-					case AdjustmentEvent.UNIT_DECREMENT:
-						randomGrainsNumber.setText(Integer.toString(scrollBar.getValue()));
-				}
+				System.out.println(Integer.toString(scrollBar.getValue()));
+				randomGrainsNumber.setText(Integer.toString(scrollBar.getValue()));
 				
 			}
 		});
@@ -233,7 +229,7 @@ public class MainWindow extends JFrame {
 		lblNewLabel.setBounds(0, 174, 124, 34);
 		panel.add(lblNewLabel);
 		
-		randomGrainsNumber = new JLabel("");
+		randomGrainsNumber = new JLabel("3");
 		randomGrainsNumber.setBounds(130, 185, 43, 16);
 		panel.add(randomGrainsNumber);
 		btnNewButton.addMouseListener(new MouseAdapter(){

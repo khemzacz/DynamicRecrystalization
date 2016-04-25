@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Algorythms.GameOfLife;
 import Algorythms.MyAlgorythm;
+import Algorythms.NaiveGrainGrowth;
 
 public class Area {
 	private Cell[][] tab;
@@ -12,6 +13,7 @@ public class Area {
 	private boolean periodic=true;
 	private boolean zeros=false;
 	private MyAlgorythm algorythm;
+	private int numberOfGrains=3;
 	
 	
 	public Area(int width, int height){
@@ -241,6 +243,27 @@ public class Area {
 
 	public boolean isZeros() {
 		return zeros;
+	}
+
+
+	public int getNumberOfGrains() {
+		return numberOfGrains;
+	}
+
+
+	public void setNumberOfGrains(int numberOfGrains) {
+		this.numberOfGrains = numberOfGrains;
+	}
+
+
+	public void setNaiveGrainGrowth() {
+		algorythm = new NaiveGrainGrowth(this);
+		
+	}
+	
+	public void generateRandomGrains(){
+		
+		
 	}
 	
 }
