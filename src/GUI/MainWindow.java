@@ -55,7 +55,8 @@ public class MainWindow extends JFrame {
 	JButton btnSpawnGliderGun;
 	JButton btnClearAll;
 	private Area a; JComboBox bcScroll; 
-	JComboBox algorythmBox; private JComboBox genTypeBox;
+	JComboBox algorythmBox; JComboBox genTypeBox;
+	JLabel grainLabel;
 	private JButton btnRealtimesimulation;
 	private JPanel rightSidePanel;
 	JScrollBar numberOfGrainsScrollBar;
@@ -124,9 +125,9 @@ public class MainWindow extends JFrame {
 		numberOfGrainsScrollBar.setValue(3); numberOfGrainsScrollBar.setBounds(0, 214, 185, 23); numberOfGrainsScrollBar.addAdjustmentListener(new numberOfGrainsScrollBarListener(this));
 		panel.add(numberOfGrainsScrollBar);
 		
-		JLabel lblNewLabel = new JLabel("<html>Number of randomly generated grains</html>");
-		lblNewLabel.setBounds(0, 174, 124, 34);
-		panel.add(lblNewLabel);
+		grainLabel = new JLabel("<html>Number of randomly generated grains</html>");
+		grainLabel.setBounds(0, 174, 124, 34);
+		panel.add(grainLabel);
 		
 		randomGrainsNumber = new JLabel("3"); randomGrainsNumber.setBounds(130, 185, 43, 16);
 		panel.add(randomGrainsNumber);

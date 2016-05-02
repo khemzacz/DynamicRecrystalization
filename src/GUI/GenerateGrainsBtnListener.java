@@ -11,8 +11,32 @@ public class GenerateGrainsBtnListener extends MouseAdapter{
 	
 	@Override
     public void mousePressed(MouseEvent e) {
-    	w.cellGrid.clearTheArea();
-    	w.cellGrid.generateRandomGrains(w.numberOfGrainsScrollBar.getValue());
-    	w.cellGrid.repaint();
+		String choice = (String)w.genTypeBox.getSelectedItem();
+		switch (choice){
+		case "random":
+	    	w.cellGrid.clearTheArea();
+	    	w.cellGrid.generateRandomGrains(w.numberOfGrainsScrollBar.getValue());
+	    	w.cellGrid.repaint();
+	    	break;
+		case "evenlySpread":
+	    	w.cellGrid.clearTheArea();
+	    	w.cellGrid.generateEvenlySpreadGrains(w.numberOfGrainsScrollBar.getValue());
+	    	w.cellGrid.repaint();
+			break;
+		case "randomRadius":
+	    	w.cellGrid.clearTheArea();
+	    	w.cellGrid.generateRandomGrainsWithRadius();
+	    	w.cellGrid.repaint();
+			
+			break;
+		case "onClick":	
+			// To-Do Set Clickable Grains
+			
+	    	w.cellGrid.repaint();
+			
+			break;
+	    default:
+		}
+
     }
 }

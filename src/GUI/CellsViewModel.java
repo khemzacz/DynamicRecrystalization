@@ -225,5 +225,15 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 		a.generateRandomGrains(value);
 	}
 
+	public void generateEvenlySpreadGrains(int value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void generateRandomGrainsWithRadius() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }
