@@ -236,11 +236,11 @@ public class MainWindow extends JFrame {
 		generateGrainsBtn = new JButton("generateGrains");
 		generateGrainsBtn.setBounds(0, 261, 156, 25);
 		generateGrainsBtn.setEnabled(false);
-		generateGrainsBtn.addMouseListener(new MouseAdapter(){
+		generateGrainsBtn.addMouseListener(new MouseAdapter(){ // random Grains
             @Override
             public void mousePressed(MouseEvent e) {
-            	cellGrid.generateRandomGrains(scrollBar.getValue());
             	cellGrid.clearTheArea();
+            	cellGrid.generateRandomGrains(scrollBar.getValue());
             	cellGrid.repaint();
             }
 			
