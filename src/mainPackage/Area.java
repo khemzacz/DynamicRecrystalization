@@ -274,7 +274,6 @@ public class Area {
 		Grain grain;
 		for(int i =0;i<n;i++)
 		{
-			System.out.println(i);
 			j = rand.nextInt(height-1);
 			k = rand.nextInt(width-1);
 			result = checkPoint(generated, new Point(j,k),rand);
@@ -282,7 +281,7 @@ public class Area {
 			cell = getCellAt(j, k);
 			grain = new Grain();
 			grain.setIdGrain(i);
-			grain.setGrainColor(new Color(rand.nextInt(255),rand.nextInt(255),rand.nextInt(255)));
+			grain.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));
 			cell.setGrain(grain);
 			cell.on();
 		}		

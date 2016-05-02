@@ -43,7 +43,7 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 	}
 	
 	public void getCellsFromArea(){
-		cells=a.getReferencesToCells();		
+		cells=a.getReferencesToCells();		//copying references to original cells from Area, i know it's an awful practice
 	}
 	
 	@Override
@@ -147,7 +147,7 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 					g.setColor(cell.getGrain().getGrainColor());
 				else g.setColor(Color.RED);
 				if(cell.isAlive())
-					g.fillRect(cell.getJ()+j,cell.getI()+i , 2,2);
+					g.fillRect(cell.getJ()+j*3,cell.getI()+i*3 , 4,4);
 			}
 
 			

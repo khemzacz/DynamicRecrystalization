@@ -46,21 +46,21 @@ import javax.swing.JList;
 import javax.swing.JScrollBar;
 
 public class MainWindow extends JFrame {
-	private boolean running;
+	boolean running;
 	private JPanel contentPane;
-	private CellsViewModel cellGrid;
+	CellsViewModel cellGrid;
 	private JPanel panel;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
-	private JButton btnNewButton_2;
-	private JButton btnNewButton_3;
-	private Area a; private JComboBox bcScroll;
-	private JComboBox algorythmBox;
+	JButton btnNextStep;
+	JButton btnNext15;
+	JButton btnSpawnGliderGun;
+	JButton btnClearAll;
+	private Area a; JComboBox bcScroll; 
+	JComboBox algorythmBox; private JComboBox genTypeBox;
 	private JButton btnRealtimesimulation;
 	private JPanel rightSidePanel;
-	private JScrollBar scrollBar;
-	private JLabel randomGrainsNumber;
-	private JButton generateGrainsBtn;
+	JScrollBar numberOfGrainsScrollBar;
+	JLabel randomGrainsNumber;
+	JButton generateGrainsBtn;
 	/**
 	 * Create the frame.
 	 */
@@ -85,82 +85,24 @@ public class MainWindow extends JFrame {
 		panel = new JPanel();
 		panel.setLocation(8, 10);
 		panel.setPreferredSize(new Dimension(875, 25));
-		panel.setSize(new Dimension(185, 312));
+		panel.setSize(new Dimension(185, 520));
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		btnNewButton = new JButton("NextStep");
-		btnNewButton.setBounds(0, 0, 156, 23);
-		btnNewButton.setVerticalAlignment(SwingConstants.TOP);
-		panel.add(btnNewButton);
+		btnNextStep = new JButton("NextStep"); btnNextStep.setBounds(0, 0, 156, 23); btnNextStep.setVerticalAlignment(SwingConstants.TOP); 
+		panel.add(btnNextStep);
 		
-		btnNewButton_1 = new JButton("Next15Steps");
-		btnNewButton_1.setBounds(0, 25, 156, 23);
-		btnNewButton_1.setVerticalAlignment(SwingConstants.TOP);
-		btnNewButton_1.addMouseListener(new MouseAdapter(){
-			
-            @Override
-            public void mousePressed(MouseEvent e) {
-            	cellGrid.gameOfLife(15);
-            }
-			
-		});
-		panel.add(btnNewButton_1);
+		btnNext15 = new JButton("Next15Steps");	btnNext15.setBounds(0, 25, 156, 23); btnNext15.setVerticalAlignment(SwingConstants.TOP); btnNext15.addMouseListener(new btnNext15MouseListener(this));
+		panel.add(btnNext15);
 		
-		btnNewButton_2 = new JButton("SpawnGliderGun");
-		btnNewButton_2.setBounds(0, 49, 156, 23);
-		btnNewButton_2.addMouseListener(new MouseAdapter(){
-			
-            @Override
-            public void mousePressed(MouseEvent e) {
-            	cellGrid.spawnGliderGun();
-            }
-			
-		});
-		panel.add(btnNewButton_2);
+		btnSpawnGliderGun = new JButton("SpawnGliderGun"); btnSpawnGliderGun.setBounds(0, 49, 156, 23); btnSpawnGliderGun.addMouseListener(new btnSpawnGliderGunListener(this));
+		panel.add(btnSpawnGliderGun);
 		
-		btnRealtimesimulation = new JButton("RealTime(toggle)");
-		btnRealtimesimulation.setBounds(0, 73, 156, 23);
-		btnRealtimesimulation.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mousePressed(MouseEvent e) {
-            	Runnable r1 = (Runnable)cellGrid; 
-    			Thread t1 = new Thread(r1);
-            	if(running){
-            		cellGrid.onOff();
-            		btnNewButton.setEnabled(true);
-            		btnNewButton_1.setEnabled(true);
-            		btnNewButton_2.setEnabled(true);
-            		btnNewButton_3.setEnabled(true);
-            		bcScroll.setEnabled(true);
-            		cellGrid.addCellListeners();
-            	} else{
-            		cellGrid.removeListenersFromCells();
-            		btnNewButton.setEnabled(false);
-            		btnNewButton_1.setEnabled(false);
-            		btnNewButton_2.setEnabled(false);
-            		btnNewButton_3.setEnabled(false);
-            		bcScroll.setEnabled(false);
-            		cellGrid.onOff();
-            		t1.start();
-            		
-            	}
-            	running = !running;
-            }
-			
-		});
+		btnRealtimesimulation = new JButton("RealTime(toggle)"); btnRealtimesimulation.setBounds(0, 73, 156, 23); btnRealtimesimulation.addMouseListener(new btnRTSimListener(this));
 		panel.add(btnRealtimesimulation);
 		
-		btnNewButton_3 = new JButton("ClearAll");
-		btnNewButton_3.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mousePressed(MouseEvent e) {
-            	cellGrid.clearTheArea();
-            }
-			
-		}); 
-		btnNewButton_3.setBounds(0, 98, 156, 23);
-		panel.add(btnNewButton_3);
+		btnClearAll = new JButton("ClearAll"); btnClearAll.addMouseListener(new btnClearAllListener(this));	btnClearAll.setBounds(0, 98, 156, 23);
+		panel.add(btnClearAll);
 		
 		ArrayList<String> pom1 = new ArrayList<String>();
 		pom1.add("Periodic");
@@ -168,96 +110,42 @@ public class MainWindow extends JFrame {
 		String[] listData = new String [pom1.size()];
 		listData = pom1.toArray(listData);
 		//bc.setBounds(700, 0, 77, 23);
-		bcScroll = new JComboBox(listData);
-		bcScroll.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				String choice = (String)bcScroll.getSelectedItem();
-				if (choice.equals("Periodic")){
-					cellGrid.setPeriodicBC();
-				}
-				else if (choice.equals("Zeros")){
-					cellGrid.setZeroBC();
-				}
-			}
-			
-			
-		});
-		bcScroll.setBounds(0, 125, 156, 23);
+		bcScroll = new JComboBox(listData); bcScroll.addActionListener(new BoundryConditionScrollListener(this)); bcScroll.setBounds(0, 125, 156, 23);
 		panel.add(bcScroll);
+		
 		ArrayList<String> pom2 = new ArrayList<String>();
 		pom2.add("GameOfLife");
 		pom2.add("NaiveGrainGrowth");
 		String[] algorythms = new String [pom2.size()];
 		listData = pom2.toArray(algorythms);
-		algorythmBox = new JComboBox(listData);
-		algorythmBox.setBounds(0, 150, 156, 22);
-		algorythmBox.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				String choice = (String)algorythmBox.getSelectedItem();
-				if (choice.equals("GameOfLife")){
-					cellGrid.setGameOfLife();
-					generateGrainsBtn.setEnabled(false);
-				}
-				else if (choice.equals("NaiveGrainGrowth")){
-					cellGrid.setNaiveGrainGrowth();
-					generateGrainsBtn.setEnabled(true);
-				}
-			}
-			
-			
-		});
+		algorythmBox = new JComboBox(listData);	algorythmBox.setBounds(0, 150, 156, 22); algorythmBox.addActionListener(new AlgorythmBoxListener(this));
 		panel.add(algorythmBox);
 		
-		scrollBar = new JScrollBar();
-		scrollBar.setOrientation(JScrollBar.HORIZONTAL);
-		scrollBar.setMinimum(2);
-		scrollBar.setValue(3);
-		scrollBar.setBounds(0, 214, 185, 34);
-		scrollBar.addAdjustmentListener(new AdjustmentListener(){
-			@Override
-			public void adjustmentValueChanged(AdjustmentEvent e) {
-				randomGrainsNumber.setText(Integer.toString(scrollBar.getValue()));
-			}
-		});
-		panel.add(scrollBar);
+		numberOfGrainsScrollBar = new JScrollBar();	numberOfGrainsScrollBar.setOrientation(JScrollBar.HORIZONTAL); numberOfGrainsScrollBar.setMinimum(2);
+		numberOfGrainsScrollBar.setValue(3); numberOfGrainsScrollBar.setBounds(0, 214, 185, 23); numberOfGrainsScrollBar.addAdjustmentListener(new numberOfGrainsScrollBarListener(this));
+		panel.add(numberOfGrainsScrollBar);
 		
 		JLabel lblNewLabel = new JLabel("<html>Number of randomly generated grains</html>");
 		lblNewLabel.setBounds(0, 174, 124, 34);
 		panel.add(lblNewLabel);
 		
-		randomGrainsNumber = new JLabel("3");
-		randomGrainsNumber.setBounds(130, 185, 43, 16);
+		randomGrainsNumber = new JLabel("3"); randomGrainsNumber.setBounds(130, 185, 43, 16);
 		panel.add(randomGrainsNumber);
 		
-		generateGrainsBtn = new JButton("generateGrains");
-		generateGrainsBtn.setBounds(0, 261, 156, 25);
-		generateGrainsBtn.setEnabled(false);
-		generateGrainsBtn.addMouseListener(new MouseAdapter(){ // random Grains
-            @Override
-            public void mousePressed(MouseEvent e) {
-            	cellGrid.clearTheArea();
-            	cellGrid.generateRandomGrains(scrollBar.getValue());
-            	cellGrid.repaint();
-            }
-			
-		});
+		generateGrainsBtn = new JButton("generateGrains"); generateGrainsBtn.setBounds(0, 283, 156, 25);
+		generateGrainsBtn.setEnabled(false); generateGrainsBtn.addMouseListener(new GenerateGrainsBtnListener(this));
 		panel.add(generateGrainsBtn);
-		btnNewButton.addMouseListener(new MouseAdapter(){
-			
-            @Override
-            public void mousePressed(MouseEvent e) {
-            	cellGrid.nextStep();
-            }
-			
-		});
 		
-		rightSidePanel = new JPanel();
-		rightSidePanel.setLocation(730, 10);
-		rightSidePanel.setSize(new Dimension(148, 520));
+		genTypeBox = new JComboBox(); genTypeBox.setBounds(0, 258, 156, 22);
+		genTypeBox.addActionListener(new genTypeBoxListener(this));
+		panel.add(genTypeBox);
+		
+		JLabel lblTypeOfGeneration = new JLabel("Type Of Generation");
+		lblTypeOfGeneration.setBounds(0, 240, 142, 16);
+		panel.add(lblTypeOfGeneration);
+		btnNextStep.addMouseListener(new btnNextStepListener(this));
+		
+		rightSidePanel = new JPanel(); rightSidePanel.setLocation(730, 10);	rightSidePanel.setSize(new Dimension(148, 520));
 		rightSidePanel.setPreferredSize(new Dimension(100, 500));
 		contentPane.add(rightSidePanel);
 		rightSidePanel.setLayout(null);
@@ -271,5 +159,15 @@ public class MainWindow extends JFrame {
 			cmp.setVisible(false);
 		}
 		
+	}
+
+
+	public Object getAlgorythmBox() {
+		return algorythmBox;
+	}
+
+
+	public Object getCellGrid() {
+		return cellGrid;
 	}
 }
