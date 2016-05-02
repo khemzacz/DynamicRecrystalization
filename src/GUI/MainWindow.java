@@ -114,8 +114,7 @@ public class MainWindow extends JFrame {
 		panel.add(bcScroll);
 		
 		ArrayList<String> pom2 = new ArrayList<String>();
-		pom2.add("GameOfLife");
-		pom2.add("NaiveGrainGrowth");
+		pom2.add("GameOfLife");	pom2.add("NaiveGrainGrowth");
 		String[] algorythms = new String [pom2.size()];
 		listData = pom2.toArray(algorythms);
 		algorythmBox = new JComboBox(listData);	algorythmBox.setBounds(0, 150, 156, 22); algorythmBox.addActionListener(new AlgorythmBoxListener(this));
@@ -136,7 +135,12 @@ public class MainWindow extends JFrame {
 		generateGrainsBtn.setEnabled(false); generateGrainsBtn.addMouseListener(new GenerateGrainsBtnListener(this));
 		panel.add(generateGrainsBtn);
 		
-		genTypeBox = new JComboBox(); genTypeBox.setBounds(0, 258, 156, 22);
+		
+		ArrayList<String> pom3 = new ArrayList<String>();
+		pom3.add("random"); pom3.add("evenlySpread"); pom3.add("randomRadius"); pom3.add("onClick");
+		String [] genOpt = new String[pom3.size()];
+		listData=pom3.toArray(genOpt);
+		genTypeBox = new JComboBox(listData); genTypeBox.setBounds(0, 258, 156, 22); 
 		genTypeBox.addActionListener(new genTypeBoxListener(this));
 		panel.add(genTypeBox);
 		
