@@ -147,7 +147,7 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 					g.setColor(cell.getGrain().getGrainColor());
 				else g.setColor(Color.RED);
 				if(cell.isAlive())
-					g.fillRect(cell.getJ()+j*3,cell.getI()+i*3 , 4,4);
+					g.fillRect(cell.getJ()+j*2,cell.getI()+i*2 , 3,3);
 			}
 
 			

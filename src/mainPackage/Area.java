@@ -312,15 +312,45 @@ public class Area {
 		int a = (int) Math.floor(sqr);
 		int c= (int)(x-Math.pow(a, 2));
 		if (c != 0){
-			int h_vect = (int)(173/(a-1));
+			int h_vect = (int)(173/(a+1));
 			int h_start = h_vect/2;
-			int v_vect = (173/(a+1));
+			int v_vect = (173/(a));
 			int v_start = v_vect/2;
 			Cell cell; Grain grain;
 			Random rand = new Random();
-			for (int i=0;i<a+1;i++)
-				for (int j=0;j<a-1;j++){
-					cell = getCellAt(h_start+h_vect*j,v_start+i*v_vect);
+			for (int i=0;i<a;i++)
+				for (int j=0;j<a;j++){
+					int pom = h_start+h_vect*i;
+					int pom1 = v_start+j*v_vect;
+					cell = getCellAt(pom,pom1);
+					grain = new Grain();
+					grain.setIdGrain(i*(a)+j); //chyba OK
+					grain.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));
+					cell.setGrain(grain);
+					cell.on();
+				}
+			v_vect = (173/(c));
+			v_start = v_vect/2;
+			for (int j=0;j<c;j++){
+				cell = getCellAt(h_start+h_vect*a,v_start+j*v_vect);
+				grain = new Grain();
+				grain.setIdGrain(a*a+j); //chyba OK
+				grain.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));
+				cell.setGrain(grain);
+				cell.on();
+			}
+		} else {
+			int h_vect = (int)(173/(a));
+			int h_start = h_vect/2;
+			int v_vect = (173/(a));
+			int v_start = v_vect/2;
+			Cell cell; Grain grain;
+			Random rand = new Random();
+			for (int i=0;i<a;i++)
+				for (int j=0;j<a;j++){
+					int pom = h_start+h_vect*i;
+					int pom1 = v_start+j*v_vect;
+					cell = getCellAt(pom,pom1);
 					grain = new Grain();
 					grain.setIdGrain(i*(a)+j); //chyba OK
 					grain.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));

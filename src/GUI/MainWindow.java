@@ -66,8 +66,9 @@ public class MainWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public MainWindow(Area a) {
+		setResizable(false);
 		running = false;
-		setSize(new Dimension(900, 601));
+		setSize(new Dimension(900, 625));
 		setMaximumSize(new Dimension(1880, 1060));
 		setMinimumSize(new Dimension(500, 500));
 		this.a =a ;
