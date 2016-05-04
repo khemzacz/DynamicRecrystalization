@@ -3,9 +3,9 @@ package GUI;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class btnClearAllListener extends MouseAdapter{
+public class BtnClearAllListener extends MouseAdapter{
 	private MainWindow w;
-	public btnClearAllListener(MainWindow w){
+	public BtnClearAllListener(MainWindow w){
 		this.w=w;
 	}
     @Override

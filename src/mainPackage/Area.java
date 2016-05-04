@@ -13,6 +13,9 @@ import Algorythms.NaiveGrainGrowth;
 public class Area {
 	private Cell[][] tab;
 	private int height=0;
+
+
+
 	private int width=0;
 	private boolean periodic=true;
 	private boolean zeros=false;
@@ -302,6 +305,54 @@ public class Area {
 		}		
 		return p;
 	}
+
+
+	public void generateEvenlySpreadGrains(int x) {
+		double sqr = Math.sqrt(x);
+		int a = (int) Math.floor(sqr);
+		int c= (int)(x-Math.pow(a, 2));
+		if (c != 0){
+			int h_vect = (int)(173/(a-1));
+			int h_start = h_vect/2;
+			int v_vect = (173/(a+1));
+			int v_start = v_vect/2;
+			Cell cell; Grain grain;
+			Random rand = new Random();
+			for (int i=0;i<a+1;i++)
+				for (int j=0;j<a-1;j++){
+					cell = getCellAt(h_start+h_vect*j,v_start+i*v_vect);
+					grain = new Grain();
+					grain.setIdGrain(i*(a)+j); //chyba OK
+					grain.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));
+					cell.setGrain(grain);
+					cell.on();
+				}
+			
+		}
+	}
 	
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+	public void initializeCells(){
+		tab = new Cell[height][width];
+		for (int i=0;i<height;i++){
+			for (int j=0;j<width;j++){
+				this.tab[i][j] = new Cell(i,j);
+								
+			}			
+		}
+	}
+
+
+	public void setGameOfLife() {
+		algorythm=new GameOfLife(this);
+		
+	}
 }
 

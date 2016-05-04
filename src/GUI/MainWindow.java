@@ -79,7 +79,7 @@ public class MainWindow extends JFrame {
 		contentPane.setLayout(null);
 		cellGrid = new CellsViewModel(a);
 		cellGrid.setDoubleBuffered(false);
-		cellGrid.setBounds(198, 10, 520, 520);
+		cellGrid.setBounds(198, 10, 519, 519);
 		contentPane.add(cellGrid);
 		cellGrid.setPreferredSize(new Dimension(500, 500));
 		cellGrid.setLayout(new GridBagLayout());
@@ -93,16 +93,16 @@ public class MainWindow extends JFrame {
 		btnNextStep = new JButton("NextStep"); btnNextStep.setBounds(0, 0, 156, 23); btnNextStep.setVerticalAlignment(SwingConstants.TOP); 
 		panel.add(btnNextStep);
 		
-		btnNext15 = new JButton("Next15Steps");	btnNext15.setBounds(0, 25, 156, 23); btnNext15.setVerticalAlignment(SwingConstants.TOP); btnNext15.addMouseListener(new btnNext15MouseListener(this));
+		btnNext15 = new JButton("Next15Steps");	btnNext15.setBounds(0, 25, 156, 23); btnNext15.setVerticalAlignment(SwingConstants.TOP); btnNext15.addMouseListener(new BtnNext15MouseListener(this));
 		panel.add(btnNext15);
 		
-		btnSpawnGliderGun = new JButton("SpawnGliderGun"); btnSpawnGliderGun.setBounds(0, 49, 156, 23); btnSpawnGliderGun.addMouseListener(new btnSpawnGliderGunListener(this));
+		btnSpawnGliderGun = new JButton("SpawnGliderGun"); btnSpawnGliderGun.setBounds(0, 49, 156, 23); btnSpawnGliderGun.addMouseListener(new BtnSpawnGliderGunListener(this));
 		panel.add(btnSpawnGliderGun);
 		
-		btnRealtimesimulation = new JButton("RealTime(toggle)"); btnRealtimesimulation.setBounds(0, 73, 156, 23); btnRealtimesimulation.addMouseListener(new btnRTSimListener(this));
+		btnRealtimesimulation = new JButton("RealTime(toggle)"); btnRealtimesimulation.setBounds(0, 73, 156, 23); btnRealtimesimulation.addMouseListener(new BtnRTSimListener(this));
 		panel.add(btnRealtimesimulation);
 		
-		btnClearAll = new JButton("ClearAll"); btnClearAll.addMouseListener(new btnClearAllListener(this));	btnClearAll.setBounds(0, 98, 156, 23);
+		btnClearAll = new JButton("ClearAll"); btnClearAll.addMouseListener(new BtnClearAllListener(this));	btnClearAll.setBounds(0, 98, 156, 23);
 		panel.add(btnClearAll);
 		
 		ArrayList<String> pom1 = new ArrayList<String>();
@@ -133,7 +133,7 @@ public class MainWindow extends JFrame {
 		panel.add(randomGrainsNumber);
 		
 		generateGrainsBtn = new JButton("generateGrains"); generateGrainsBtn.setBounds(0, 283, 156, 25);
-		generateGrainsBtn.setEnabled(false); generateGrainsBtn.addMouseListener(new GenerateGrainsBtnListener(this));
+		generateGrainsBtn.setEnabled(false); generateGrainsBtn.addMouseListener(new BtnGenerateGrainsListener(this));
 		panel.add(generateGrainsBtn);
 		
 		
@@ -148,7 +148,7 @@ public class MainWindow extends JFrame {
 		JLabel lblTypeOfGeneration = new JLabel("Type Of Generation");
 		lblTypeOfGeneration.setBounds(0, 240, 142, 16);
 		panel.add(lblTypeOfGeneration);
-		btnNextStep.addMouseListener(new btnNextStepListener(this));
+		btnNextStep.addMouseListener(new BtnNextStepListener(this));
 		
 		rightSidePanel = new JPanel(); rightSidePanel.setLocation(730, 10);	rightSidePanel.setSize(new Dimension(148, 520));
 		rightSidePanel.setPreferredSize(new Dimension(100, 500));
@@ -174,5 +174,11 @@ public class MainWindow extends JFrame {
 
 	public Object getCellGrid() {
 		return cellGrid;
+	}
+
+
+	public void initializeCells() {
+		a.initializeCells();
+		
 	}
 }

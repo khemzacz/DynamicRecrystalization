@@ -3,9 +3,9 @@ package GUI;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class GenerateGrainsBtnListener extends MouseAdapter{
+public class BtnGenerateGrainsListener extends MouseAdapter{
     private MainWindow w;
-    public GenerateGrainsBtnListener(MainWindow w){
+    public BtnGenerateGrainsListener(MainWindow w){
     	this.w=w;
     }
 	

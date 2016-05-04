@@ -3,9 +3,9 @@ package GUI;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class btnSpawnGliderGunListener extends MouseAdapter {
+public class BtnSpawnGliderGunListener extends MouseAdapter {
 	private MainWindow w;
-	public btnSpawnGliderGunListener(MainWindow w){
+	public BtnSpawnGliderGunListener(MainWindow w){
 		this.w=w;
 	}
     @Override

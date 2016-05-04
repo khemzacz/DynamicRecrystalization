@@ -3,9 +3,9 @@ package GUI;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class btnRTSimListener extends MouseAdapter{
+public class BtnRTSimListener extends MouseAdapter{
 	private MainWindow w;
-	public btnRTSimListener(MainWindow w){
+	public BtnRTSimListener(MainWindow w){
 		this.w=w;
 	}
     @Override

@@ -182,6 +182,7 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 		
 		}		
 	}
+	
 	public void addCellListeners(){
 
 		
@@ -190,8 +191,8 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 	public void clearTheArea() {
 		for (Cell cell:cells)
 		{
-			cell.off();
 			cell.nullifyGrain();
+			cell.off();
 		}
 		repaint();
 		
@@ -212,7 +213,9 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 	}
 
 	public void setGameOfLife() {
-		
+		clearTheArea();
+		a.setGameOfLife();
+		repaint();
 	}
 
 	public void setNaiveGrainGrowth() {
@@ -226,14 +229,19 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 	}
 
 	public void generateEvenlySpreadGrains(int value) {
-		// TODO Auto-generated method stub
-		
+		a.generateEvenlySpreadGrains(value);
 	}
 
 	public void generateRandomGrainsWithRadius() {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	public void setWidth(int v){
+		a.setWidth(v);
+	}
+	public void setHeight(int v){
+		a.setHeight(v);
+	}
 	
 }
