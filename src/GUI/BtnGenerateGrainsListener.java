@@ -25,7 +25,7 @@ public class BtnGenerateGrainsListener extends MouseAdapter{
 			break;
 		case "randomRadius":
 	    	w.cellGrid.clearTheArea();
-	    	w.cellGrid.generateRandomGrainsWithRadius();
+	    	w.cellGrid.generateRandomGrainsWithRadius(w.numberOfGrainsScrollBar.getValue());
 	    	w.cellGrid.repaint();
 			
 			break;

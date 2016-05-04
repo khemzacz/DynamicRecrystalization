@@ -11,7 +11,7 @@ public class Cell {
 	private boolean alive;
 	private int i=0; private int j=0;
 	private Grain grain;
-	
+	private boolean inRadius;
 	public Cell(int i, int j){
 		alive=false;
 		grain=null;
@@ -79,6 +79,14 @@ public class Cell {
 
 	public void setGrain(Grain grain2) {
 		grain=grain2;
+	}
+
+	public boolean isInRadius() {
+		return inRadius;
+	}
+
+	public void setInRadius(boolean inRadius) {
+		this.inRadius = inRadius;
 	}
 
 }

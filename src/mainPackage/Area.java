@@ -384,5 +384,87 @@ public class Area {
 		algorythm=new GameOfLife(this);
 		
 	}
+	
+	
+
+	
+	
+	public void generateRandomGrainsWithRadius(int r) {
+		Random rand = new Random();
+		int k=rand.nextInt(height), l=rand.nextInt(width);
+		Cell cell;// = getCellAt(k,l);
+		Grain grain; int id=0;
+		//grain = new Grain(); 
+		//grain.setIdGrain(id);
+		//grain.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));
+		//cell.setGrain(grain);
+		//cell.setInRadius(true);
+		//cell.on();
+		ArrayList<Cell> cells = new ArrayList<Cell>();
+		cells = getReferencesToCells();
+		//cells.remove(cell);
+		int pom=0;
+		if (zeros){
+			while(cells.size()>0){
+				pom=cells.size();
+				cell = cells.get(rand.nextInt(pom));
+				grain = new Grain();
+				grain.setIdGrain(id);
+				grain.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));
+				cell.setGrain(grain);
+				cell.setInRadius(true);
+				cell.on();
+				setInRadiusZeros(cell.getI(),cell.getJ(),r,cells);
+			}
+		}		
+		if (periodic){
+			while(cells.size()>0){
+				pom=cells.size();
+				cell = cells.get(rand.nextInt(pom));
+				grain = new Grain();
+				grain.setIdGrain(id);
+				grain.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));
+				cell.setGrain(grain);
+				cell.setInRadius(true);
+				cell.on();
+				setInRadiusPeriodic(cell.getI(),cell.getJ(),r,cells);
+			}
+		}
+
+		
+		
+		
+	}
+	
+	private void setInRadiusPeriodic(int k, int l, int r, ArrayList<Cell> cells) {
+		Cell cell;
+		for(int i=k-r;i<=k+r;i++){
+			for(int j=l-r;j<=l+r;j++){
+				if((Math.pow(i-k, 2) + Math.pow(j-l, 2)) <=  Math.pow(r,2)){
+					cell = getCellAt(Math.floorMod(i, height),Math.floorMod(j, width));
+					cell.setInRadius(true);
+					cells.remove(cell);
+				}
+			}
+		}
+		
+	}
+
+
+	public void setInRadiusZeros(int k, int l, int r,ArrayList<Cell> cells){
+		Cell cell;
+		for(int i=k-r;i<=k+r;i++){
+			for(int j=l-r;j<=l+r;j++){
+				if((Math.pow(i-k, 2) + Math.pow(j-l, 2)) <=  Math.pow(r,2)){
+					if(i<0 || i>=width || j<0 || j>= width)
+						continue;
+					cell = getCellAt(i,j);
+					cell.setInRadius(true);
+					cells.remove(cell);
+				}
+			}
+		}
+		
+	}
 }
 
