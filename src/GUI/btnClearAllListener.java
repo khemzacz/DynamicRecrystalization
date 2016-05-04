@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 public class BtnClearAllListener extends MouseAdapter{
 	private MainWindow w;
 	public BtnClearAllListener(MainWindow w){
+		super();
 		this.w=w;
 	}
     @Override

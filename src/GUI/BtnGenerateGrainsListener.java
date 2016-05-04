@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 public class BtnGenerateGrainsListener extends MouseAdapter{
     private MainWindow w;
     public BtnGenerateGrainsListener(MainWindow w){
+		super();
     	this.w=w;
     }
 	

@@ -74,6 +74,9 @@ public class Cell {
 	}
 	
 	public void nullifyGrain(){
+		if(grain==null)
+			return;
+		grain.deleteGrain(); // removes from static ArrayList<Grain> grains
 		grain=null;
 	}
 

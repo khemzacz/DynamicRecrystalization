@@ -3,9 +3,10 @@ package GUI;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 
-public class numberOfGrainsScrollBarListener implements AdjustmentListener{
+public class NumberOfGrainsScrollBarListener implements AdjustmentListener{
 	MainWindow w;
-	public numberOfGrainsScrollBarListener(MainWindow w){
+	public NumberOfGrainsScrollBarListener(MainWindow w){
+		super();
 		this.w=w;
 	}
 	@Override

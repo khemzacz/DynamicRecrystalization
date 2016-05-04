@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 public class BtnNextStepListener extends MouseAdapter {
 	private MainWindow w;
 	public BtnNextStepListener(MainWindow w){
+		super();
 		this.w=w;
 	}
     @Override

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 public class AlgorythmBoxListener implements ActionListener {
 	private MainWindow w;
 	public AlgorythmBoxListener(MainWindow w){
+		super();
 		this.w=w;
 	}
 

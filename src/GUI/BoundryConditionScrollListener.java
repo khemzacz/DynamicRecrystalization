@@ -7,6 +7,7 @@ public class BoundryConditionScrollListener implements ActionListener{
 	private MainWindow w;
 	
 	public BoundryConditionScrollListener(MainWindow w){
+		super();
 		this.w=w;
 		
 	}

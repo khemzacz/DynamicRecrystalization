@@ -123,7 +123,7 @@ public class MainWindow extends JFrame {
 		panel.add(algorythmBox);
 		
 		numberOfGrainsScrollBar = new JScrollBar();	numberOfGrainsScrollBar.setOrientation(JScrollBar.HORIZONTAL); numberOfGrainsScrollBar.setMinimum(2);
-		numberOfGrainsScrollBar.setValue(3); numberOfGrainsScrollBar.setBounds(0, 214, 185, 23); numberOfGrainsScrollBar.addAdjustmentListener(new numberOfGrainsScrollBarListener(this));
+		numberOfGrainsScrollBar.setValue(3); numberOfGrainsScrollBar.setBounds(0, 214, 185, 23); numberOfGrainsScrollBar.addAdjustmentListener(new NumberOfGrainsScrollBarListener(this));
 		panel.add(numberOfGrainsScrollBar);
 		
 		grainLabel = new JLabel("<html>Number of randomly generated grains</html>");

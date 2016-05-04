@@ -27,7 +27,7 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 	private int cellSize;
 	private int distance;
 	private ArrayList<Cell> cells;
-	private Area a;
+	Area a;
 	private boolean shutdown;
 	
 	public CellsViewModel(Area a){

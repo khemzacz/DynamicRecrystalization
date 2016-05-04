@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 public class BtnRTSimListener extends MouseAdapter{
 	private MainWindow w;
 	public BtnRTSimListener(MainWindow w){
+		super();
 		this.w=w;
 	}
     @Override
