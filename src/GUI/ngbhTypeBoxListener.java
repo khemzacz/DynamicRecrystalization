@@ -3,13 +3,17 @@ package GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import Algorythms.HexagonalLeft;
+import Algorythms.HexagonalRandom;
+import Algorythms.HexagonalRight;
 import Algorythms.Moore;
+import Algorythms.PentagonalRandom;
 import Algorythms.VonNeumann;
 
-public class ngbhTypeBoxListener implements ActionListener {
+public class NgbhTypeBoxListener implements ActionListener {
 	private MainWindow w;
 
-	public ngbhTypeBoxListener(MainWindow w){
+	public NgbhTypeBoxListener(MainWindow w){
 		this.w=w;
 	}
 	
@@ -25,19 +29,19 @@ public class ngbhTypeBoxListener implements ActionListener {
 			break;
 			
 		case "Hexagonal left":
-			
+			w.cellGrid.a.setNeighbourhood(new HexagonalLeft(w.cellGrid.a));
 			break;
 			
 		case "Hexagonal right":
-			
+			w.cellGrid.a.setNeighbourhood(new HexagonalRight(w.cellGrid.a));
 			break;
 			
 		case "Hexagonal random":
-			
+			w.cellGrid.a.setNeighbourhood(new HexagonalRandom(w.cellGrid.a));
 			break;
 			
-		case "Pentaonal random":
-			
+		case "Pentagonal random":
+			w.cellGrid.a.setNeighbourhood(new PentagonalRandom(w.cellGrid.a));		
 			break;
 		default:
 			break;		

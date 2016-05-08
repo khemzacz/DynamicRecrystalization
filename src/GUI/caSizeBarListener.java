@@ -3,10 +3,10 @@ package GUI;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 
-public class caSizeBarListener implements AdjustmentListener {
+public class CaSizeBarListener implements AdjustmentListener {
 	private MainWindow w;
 
-	public caSizeBarListener(MainWindow w){
+	public CaSizeBarListener(MainWindow w){
 		this.w=w;
 	}
 	

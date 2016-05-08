@@ -3,10 +3,10 @@ package GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class genTypeBoxListener implements ActionListener{
+public class GenTypeBoxListener implements ActionListener{
 	private MainWindow w;
 	private NaiveGrainGrowthOnClickListener nggl;
-	public genTypeBoxListener(MainWindow w){
+	public GenTypeBoxListener(MainWindow w){
 		super();
 		this.w=w;
 		nggl = new NaiveGrainGrowthOnClickListener(w);

@@ -148,7 +148,7 @@ public class MainWindow extends JFrame {
 		String [] genOpt = new String[pom3.size()];
 		listData=pom3.toArray(genOpt);
 		genTypeBox = new JComboBox(listData); genTypeBox.setBounds(0, 258, 156, 22); 
-		genTypeBox.addActionListener(new genTypeBoxListener(this));
+		genTypeBox.addActionListener(new GenTypeBoxListener(this));
 		panel.add(genTypeBox);
 		
 		JLabel lblTypeOfGeneration = new JLabel("Type Of Generation:");
@@ -160,11 +160,11 @@ public class MainWindow extends JFrame {
 		panel.add(lblNeighbourhoodType);
 		
 		ArrayList<String> pom4 = new ArrayList<String>();
-		pom4.add("Moore"); pom4.add("von neumann"); pom4.add("Hexagonal left"); pom4.add("Hexagonal right"); pom4.add("Hexagonal random"); pom4.add("Pentaonal random");
+		pom4.add("Moore"); pom4.add("von neumann"); pom4.add("Hexagonal left"); pom4.add("Hexagonal right"); pom4.add("Hexagonal random"); pom4.add("Pentagonal random");
 		String [] ngbhOpt = new String[pom4.size()];
 		listData = pom4.toArray(ngbhOpt);
 		ngbhTypeBox = new JComboBox(listData); ngbhTypeBox.setBounds(0, 334, 156, 20);
-		ngbhTypeBox.addActionListener(new ngbhTypeBoxListener(this));
+		ngbhTypeBox.addActionListener(new NgbhTypeBoxListener(this));
 		
 		panel.add(ngbhTypeBox);
 		
@@ -176,7 +176,7 @@ public class MainWindow extends JFrame {
 		rightSidePanel.setLayout(null);
 		
 		caSizeBar = new JScrollBar(); caSizeBar.setValue(3);	caSizeBar.setMaximum(15); caSizeBar.setMinimum(1);
-		caSizeBar.setOrientation(JScrollBar.HORIZONTAL); caSizeBar.setBounds(0, 21, 162, 22); caSizeBar.addAdjustmentListener(new caSizeBarListener(this));
+		caSizeBar.setOrientation(JScrollBar.HORIZONTAL); caSizeBar.setBounds(0, 21, 162, 22); caSizeBar.addAdjustmentListener(new CaSizeBarListener(this));
 		rightSidePanel.add(caSizeBar);
 		
 		JLabel lbCaChooseSizeLabel = new JLabel("Choose size of CA:");
