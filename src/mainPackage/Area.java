@@ -112,8 +112,8 @@ public class Area {
 			algorythm.step();
 	}
 	
-	public void step(){
-		algorythm.step();
+	public boolean step(){
+		return algorythm.step();
 	}
 	
 //	public void gameOfLifeStep(){

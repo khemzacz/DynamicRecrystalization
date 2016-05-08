@@ -12,7 +12,7 @@ public class GameOfLife extends MyAlgorythm {
 		width=a.getWidth();
 	}
 	
-	public void step(){
+	public boolean step(){
 		Cell[][] prev = a.getCellularCopy();
 		int ii = 0; int jj = 0; int iii = 0; int jjj = 0;
 		int neighbours = 0;
@@ -64,7 +64,7 @@ public class GameOfLife extends MyAlgorythm {
 				}
 				
 			}
-		
+		return false;
 		
 	}
 

@@ -78,7 +78,7 @@ public class MainWindow extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		cellGrid = new CellsViewModel(a);
+		cellGrid = new CellsViewModel(a,this);
 		cellGrid.setDoubleBuffered(false);
 		cellGrid.setBounds(198, 10, 519, 519);
 		contentPane.add(cellGrid);

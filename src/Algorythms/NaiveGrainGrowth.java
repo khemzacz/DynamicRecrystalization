@@ -13,7 +13,8 @@ public class NaiveGrainGrowth extends MyAlgorythm {
 		height=a.getHeight(); width=a.getWidth();
 	}
 
-	public void step(){
+	public boolean step(){
+		boolean last = true; 
 		Cell[][] prev = a.getCellularCopy();
 		//int ii = 0; int jj = 0; int iii = 0; int jjj = 0;
 		for (int i = 0; i < height; i++)
@@ -23,11 +24,13 @@ public class NaiveGrainGrowth extends MyAlgorythm {
 					continue; 
 				Cell tmp = a.getCellAt(i, j);
 				tmp.setGrain(ngbh.determineGrain(prev, i, j));
+				last = false;
 				if(tmp.getGrain() != null){
 					tmp.on();
 				}
 				
 			}
+		return last;
 	}
 	
 	public void setNeighbourhood(Neighbourhood ngbh){

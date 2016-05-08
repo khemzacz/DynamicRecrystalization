@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.RepaintManager;
 
 public class CellsViewModel extends JPanel implements ComponentListener, MouseListener, Runnable {
-	private JPanel self;
+	private JPanel self; private MainWindow w;
 	private int lineThickness;
 	private int cellSize;
 	private int distance;
@@ -30,8 +30,9 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 	Area a;
 	private boolean shutdown;
 	
-	public CellsViewModel(Area a){
+	public CellsViewModel(Area a, MainWindow w){
 		shutdown=true;
+		this.w=w;
 		self = this;
 		cells = new ArrayList<Cell>();
 		//panels = new ArrayList<JPanel>();
@@ -49,7 +50,7 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 	@Override
 	public void run() {
 		while(!shutdown){
-			a.step();
+			shutdown = a.step();
 			try {
 				
 				Thread.sleep(100);
@@ -60,7 +61,13 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 			repaint();
 			
 		}
-		
+		w.cellGrid.onOff();
+		w.btnNextStep.setEnabled(true);
+		w.btnNext15.setEnabled(true);
+		w.btnSpawnGliderGun.setEnabled(true);
+		w.btnClearAll.setEnabled(true);
+		w.bcScroll.setEnabled(true);
+		w.cellGrid.addCellListeners();
 	}
 	
 

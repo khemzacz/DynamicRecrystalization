@@ -1,8 +1,10 @@
 package Algorythms;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.TreeMap;
 
 import mainPackage.Area;
@@ -18,7 +20,7 @@ public class Moore extends Neighbourhood{
 	@Override
 	public Grain determineGrain(Cell[][] tab, int i, int j) {
 		int iii=0, jjj=0, height = a.getHeight(), width = a.getWidth();
-		neighbours = new HashMap<Grain,Integer>();
+		neighbours = new HashMap<Grain,Integer>(); ArrayList<Grain> tmp2 = new ArrayList<Grain>(); Random rand = new Random();
 		Grain pom = null;
 		for (int ii=i-1;ii<i+2;ii++){
 			for(int jj = j-1;jj<j+2;jj++){
@@ -67,10 +69,18 @@ public class Moore extends Neighbourhood{
 			tmp = entry.getValue();
 			if (pom2 < tmp ){
 				pom2 = tmp;
-				pom = entry.getKey();
+				//pom = entry.getKey();
 			}
 		}
-		return pom;
+		for (Map.Entry<Grain, Integer> entry : neighbours.entrySet()){
+			tmp = entry.getValue();
+			if (pom2 == tmp ){
+				tmp2.add(entry.getKey());
+			}
+		}
+		if (tmp2.isEmpty())
+			return null;
+		return tmp2.get(rand.nextInt(tmp2.size())); // Randomizing grain if equal ammount of neighbours
 	}
 
 }
