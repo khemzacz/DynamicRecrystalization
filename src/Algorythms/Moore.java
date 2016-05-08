@@ -19,7 +19,7 @@ public class Moore extends Neighbourhood{
 	public Grain determineGrain(Cell[][] tab, int i, int j) {
 		int iii=0, jjj=0, height = a.getHeight(), width = a.getWidth();
 		neighbours = new HashMap<Grain,Integer>();
-		Grain pom = new Grain();
+		Grain pom = null;
 		for (int ii=i-1;ii<i+2;ii++){
 			for(int jj = j-1;jj<j+2;jj++){
 				if (jj==j && ii==i){
@@ -45,19 +45,21 @@ public class Moore extends Neighbourhood{
 					pom = tab[iii][jjj].getGrain();
 				}
 				else{
-					System.out.println("dead neighbour ");
+					//System.out.println("dead neighbour ");
 					continue;
 				}
 
 				
-				
-				
-				if(!neighbours.containsKey(pom)){
-					neighbours.put(pom, 1);
+				if ( pom!= null){
+					if(!neighbours.containsKey(pom)){
+						neighbours.put(pom, 1);
+					}
+					else{
+						neighbours.put(pom,neighbours.get(pom)+1);
+					}
+					
 				}
-				else{
-					neighbours.put(pom,neighbours.get(pom)+1);
-				}
+
 			}
 		} 
 		int pom2=0; int tmp=0;
