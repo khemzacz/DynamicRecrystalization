@@ -9,6 +9,7 @@ import java.util.Random;
 import Algorythms.GameOfLife;
 import Algorythms.MyAlgorythm;
 import Algorythms.NaiveGrainGrowth;
+import Algorythms.Neighbourhood;
 
 public class Area {
 	private Cell[][] tab;
@@ -267,6 +268,10 @@ public class Area {
 	public void setNaiveGrainGrowth() {
 		algorythm = new NaiveGrainGrowth(this);
 		
+	}
+	
+	public void setNeighbourhood(Neighbourhood ngbh){
+		algorythm.setNeighbourhood(ngbh);
 	}
 	
 	public void generateRandomGrains(int n){

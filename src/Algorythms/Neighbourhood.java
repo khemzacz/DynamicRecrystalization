@@ -14,8 +14,6 @@ public abstract class Neighbourhood {
 	public Neighbourhood (Area a){
 		this.a = a;
 	}
-	public Grain determineGrain(Cell[][] tab, int i, int j){
-		return null;
-	};
+	public abstract Grain determineGrain(Cell[][] tab, int i, int j);
 	
 }

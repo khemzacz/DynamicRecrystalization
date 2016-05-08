@@ -68,4 +68,10 @@ public class GameOfLife extends MyAlgorythm {
 		
 	}
 
+	@Override
+	public void setNeighbourhood(Neighbourhood n) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

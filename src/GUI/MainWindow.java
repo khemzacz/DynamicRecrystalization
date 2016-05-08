@@ -54,6 +54,8 @@ public class MainWindow extends JFrame {
 	JButton btnNext15;
 	JButton btnSpawnGliderGun;
 	JButton btnClearAll;
+	JLabel lblCaSizeLabel;
+	JComboBox ngbhTypeBox ;
 	private Area a; JComboBox bcScroll; 
 	JComboBox algorythmBox; JComboBox genTypeBox;
 	JLabel grainLabel;
@@ -62,6 +64,9 @@ public class MainWindow extends JFrame {
 	JScrollBar numberOfGrainsScrollBar;
 	JLabel randomGrainsNumber;
 	JButton generateGrainsBtn;
+	private JLabel lblChooseRtsSpeedLabel;
+	JScrollBar rtsSpeedBar;
+	JLabel lblRtsSpeedLabel; JScrollBar caSizeBar;
 	/**
 	 * Create the frame.
 	 */
@@ -146,15 +151,55 @@ public class MainWindow extends JFrame {
 		genTypeBox.addActionListener(new genTypeBoxListener(this));
 		panel.add(genTypeBox);
 		
-		JLabel lblTypeOfGeneration = new JLabel("Type Of Generation");
+		JLabel lblTypeOfGeneration = new JLabel("Type Of Generation:");
 		lblTypeOfGeneration.setBounds(0, 240, 142, 16);
 		panel.add(lblTypeOfGeneration);
+		
+		JLabel lblNeighbourhoodType = new JLabel("Type of neighbourhood:");
+		lblNeighbourhoodType.setBounds(0, 319, 156, 14);
+		panel.add(lblNeighbourhoodType);
+		
+		ArrayList<String> pom4 = new ArrayList<String>();
+		pom4.add("Moore"); pom4.add("von neumann"); pom4.add("Hexagonal left"); pom4.add("Hexagonal right"); pom4.add("Hexagonal random"); pom4.add("Pentaonal random");
+		String [] ngbhOpt = new String[pom4.size()];
+		listData = pom4.toArray(ngbhOpt);
+		ngbhTypeBox = new JComboBox(listData); ngbhTypeBox.setBounds(0, 334, 156, 20);
+		ngbhTypeBox.addActionListener(new ngbhTypeBoxListener(this));
+		
+		panel.add(ngbhTypeBox);
+		
 		btnNextStep.addMouseListener(new BtnNextStepListener(this));
 		
-		rightSidePanel = new JPanel(); rightSidePanel.setLocation(730, 10);	rightSidePanel.setSize(new Dimension(148, 520));
+		rightSidePanel = new JPanel(); rightSidePanel.setLocation(730, 10);	rightSidePanel.setSize(new Dimension(162, 520));
 		rightSidePanel.setPreferredSize(new Dimension(100, 500));
 		contentPane.add(rightSidePanel);
 		rightSidePanel.setLayout(null);
+		
+		caSizeBar = new JScrollBar(); caSizeBar.setValue(3);	caSizeBar.setMaximum(15); caSizeBar.setMinimum(1);
+		caSizeBar.setOrientation(JScrollBar.HORIZONTAL); caSizeBar.setBounds(0, 21, 162, 22); caSizeBar.addAdjustmentListener(new caSizeBarListener(this));
+		rightSidePanel.add(caSizeBar);
+		
+		JLabel lbCaChooseSizeLabel = new JLabel("Choose size of CA:");
+		lbCaChooseSizeLabel.setBounds(0, 0, 138, 14);
+		rightSidePanel.add(lbCaChooseSizeLabel);
+		
+		lblCaSizeLabel = new JLabel("Medium");
+		lblCaSizeLabel.setBounds(0, 43, 162, 14);
+		rightSidePanel.add(lblCaSizeLabel);
+		
+		lblChooseRtsSpeedLabel = new JLabel("<html>Choose real time simulation speed:</html>");
+		lblChooseRtsSpeedLabel.setBounds(0, 81, 138, 31);
+		rightSidePanel.add(lblChooseRtsSpeedLabel);
+		
+		rtsSpeedBar = new JScrollBar();	
+		rtsSpeedBar.setValue(5);rtsSpeedBar.setMaximum(19);	rtsSpeedBar.setMinimum(1);
+		rtsSpeedBar.setOrientation(JScrollBar.HORIZONTAL); rtsSpeedBar.setBounds(0, 110, 162, 22);
+		rtsSpeedBar.addAdjustmentListener(new RtsSpeedBarListener(this));
+		rightSidePanel.add(rtsSpeedBar);
+		
+		lblRtsSpeedLabel = new JLabel("Medium");
+		lblRtsSpeedLabel.setBounds(0, 132, 162, 14);
+		rightSidePanel.add(lblRtsSpeedLabel);
 		
 	}
 	
@@ -182,4 +227,6 @@ public class MainWindow extends JFrame {
 		a.initializeCells();
 		
 	}
+	
+	
 }

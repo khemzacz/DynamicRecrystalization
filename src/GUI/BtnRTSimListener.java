@@ -20,6 +20,13 @@ public class BtnRTSimListener extends MouseAdapter{
     		w.btnSpawnGliderGun.setEnabled(true);
     		w.btnClearAll.setEnabled(true);
     		w.bcScroll.setEnabled(true);
+    		w.algorythmBox.setEnabled(true);
+    		w.numberOfGrainsScrollBar.setEnabled(true);
+    		w.genTypeBox.setEnabled(true);
+    		w.generateGrainsBtn.setEnabled(true);
+    		w.ngbhTypeBox.setEnabled(true);
+    		w.rtsSpeedBar.setEnabled(true);
+    		w.caSizeBar.setEnabled(true);
     		w.cellGrid.addCellListeners();
     	} else{
     		w.cellGrid.removeListenersFromCells();
@@ -28,6 +35,13 @@ public class BtnRTSimListener extends MouseAdapter{
     		w.btnSpawnGliderGun.setEnabled(false);
     		w.btnClearAll.setEnabled(false);
     		w.bcScroll.setEnabled(false);
+    		w.algorythmBox.setEnabled(false);
+    		w.numberOfGrainsScrollBar.setEnabled(false);
+    		w.genTypeBox.setEnabled(false);
+    		w.generateGrainsBtn.setEnabled(false);
+    		w.ngbhTypeBox.setEnabled(false);
+    		w.rtsSpeedBar.setEnabled(false);
+    		w.caSizeBar.setEnabled(false);
     		w.cellGrid.onOff();
     		t1.start();
     		

@@ -7,7 +7,7 @@ import mainPackage.Cell;
 
 public class NaiveGrainGrowth extends MyAlgorythm {
 	private int height=0; private int width=0;
-	private Neighbourhood ngbh= new Moore(a);
+	
 	public NaiveGrainGrowth(Area a) {
 		super(a);
 		height=a.getHeight(); width=a.getWidth();

@@ -25,7 +25,7 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 	private JPanel self; private MainWindow w;
 	private int lineThickness;
 	private int cellSize;
-	private int distance;
+	private int distance; private int speed;
 	private ArrayList<Cell> cells;
 	Area a;
 	private boolean shutdown;
@@ -36,6 +36,7 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 		self = this;
 		cells = new ArrayList<Cell>();
 		//panels = new ArrayList<JPanel>();
+		this.speed = 66;
 		lineThickness=1;
 		cellSize = 8;
 		distance = lineThickness+cellSize;
@@ -53,7 +54,7 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 			shutdown = a.step();
 			try {
 				
-				Thread.sleep(100);
+				Thread.sleep(speed);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -61,12 +62,20 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 			repaint();
 			
 		}
-		w.cellGrid.onOff();
+		w.cellGrid.shutdown = true;
+		w.running = false;
 		w.btnNextStep.setEnabled(true);
 		w.btnNext15.setEnabled(true);
 		w.btnSpawnGliderGun.setEnabled(true);
 		w.btnClearAll.setEnabled(true);
 		w.bcScroll.setEnabled(true);
+		w.algorythmBox.setEnabled(true);
+		w.numberOfGrainsScrollBar.setEnabled(true);
+		w.genTypeBox.setEnabled(true);
+		w.generateGrainsBtn.setEnabled(true);
+		w.ngbhTypeBox.setEnabled(true);
+		w.rtsSpeedBar.setEnabled(true);
+		w.caSizeBar.setEnabled(true);
 		w.cellGrid.addCellListeners();
 	}
 	
@@ -250,6 +259,11 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 	}
 	public void setHeight(int v){
 		a.setHeight(v);
+	}
+
+	public void setSpeed(int i) {
+		this.speed=i;
+		
 	}
 	
 }
