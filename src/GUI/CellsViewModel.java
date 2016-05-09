@@ -12,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import mainPackage.Cell;
@@ -23,16 +24,16 @@ import javax.swing.RepaintManager;
 
 public class CellsViewModel extends JPanel implements ComponentListener, MouseListener, Runnable {
 	private JPanel self; private MainWindow w;
-	private int lineThickness;
+	private int lineThickness; private int size;
 	private int cellSize;
 	private int distance; private int speed;
-	private ArrayList<Cell> cells;
+	private ArrayList<Cell> cells; private Lock l;
 	Area a;
-	private boolean shutdown;
+	private boolean shutdown; private boolean extShutdown;
 	
 	public CellsViewModel(Area a, MainWindow w){
-		shutdown=true;
-		this.w=w;
+		shutdown=true; extShutdown = true;
+		this.w=w; size=3;
 		self = this;
 		cells = new ArrayList<Cell>();
 		//panels = new ArrayList<JPanel>();
@@ -42,6 +43,7 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 		distance = lineThickness+cellSize;
 		this.a =a ;
 		getCellsFromArea();
+		l = new ReentrantLock();
 	}
 	
 	public void getCellsFromArea(){
@@ -50,10 +52,9 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 	
 	@Override
 	public void run() {
-		while(!shutdown){
+		while(!(shutdown || extShutdown)){
 			shutdown = a.step();
 			try {
-				
 				Thread.sleep(speed);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -83,55 +84,46 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void componentHidden(ComponentEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void componentMoved(ComponentEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void componentResized(ComponentEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void componentShown(ComponentEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 	
@@ -156,6 +148,8 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 		int height = a.getHeight();
 		int width = a.getWidth();
 		Cell cell;
+		g.setColor(Color.black);
+		g.drawRect(0, 0, size*width+1, size*height+1);
 		for (int i=0;i<height;i++){
 			for (int j = 0;j<width;j++){
 				cell = a.getCellAt(i,j);
@@ -163,7 +157,7 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 					g.setColor(cell.getGrain().getGrainColor());
 				else g.setColor(Color.RED);
 				if(cell.isAlive())
-					g.fillRect(cell.getJ()+j*2,cell.getI()+i*2 , 3,3);
+					g.fillRect(cell.getJ()+j*(size-1)+1,cell.getI()+i*(size-1)+1 , size,size);
 			}
 
 			
@@ -254,16 +248,31 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 		
 	}
 	
-	public void setWidth(int v){
-		a.setWidth(v);
-	}
-	public void setHeight(int v){
-		a.setHeight(v);
-	}
+
 
 	public void setSpeed(int i) {
 		this.speed=i;
 		
+	}
+
+	public int getCellSize() {
+		return size;
+	}
+
+	public void setCaSize(int s) {
+		size = s;
+	}
+
+	public boolean isShutdown() {
+		return shutdown;
+	}
+
+	public boolean isExtShutDown() {
+		return extShutdown;
+	}
+
+	public void setExtShutDown(boolean extShutDown) {
+		this.extShutdown = extShutDown;
 	}
 	
 }

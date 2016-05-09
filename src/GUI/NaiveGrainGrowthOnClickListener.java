@@ -20,8 +20,9 @@ public class NaiveGrainGrowthOnClickListener implements MouseListener{
 		int x=e.getX();
 		int y=e.getY();
 		//System.out.println(x+" "+y);
-		int i=x/3;
-		int j=y/3;
+		int dim = w.cellGrid.getCellSize();
+		int i=(int) Math.floor((x-1)/dim); // -1 because there is a 1 px border on view
+		int j=(int) Math.floor((y-1)/dim);
 		Cell cell = w.cellGrid.a.getCellAt(j, i);
 		if (cell.isAlive()){
 			cell.nullifyGrain();

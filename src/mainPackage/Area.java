@@ -36,6 +36,15 @@ public class Area {
 		this.algorythm=new GameOfLife(this);
 	}
 	
+	public void reInitializeCells(){
+		tab = new Cell[height][width];
+		for (int i=0;i<height;i++){
+			for (int j=0;j<width;j++){
+				this.tab[i][j] = new Cell(i,j);
+								
+			}			
+		}
+	}
 	
 	public void setCell(int i, int j)
 	{
@@ -318,9 +327,9 @@ public class Area {
 		int a = (int) Math.floor(sqr);
 		int c= (int)(x-Math.pow(a, 2));
 		if (c != 0){
-			int h_vect = (int)(173/(a+1));
+			int h_vect = (int)(width/(a+1));
 			int h_start = h_vect/2;
-			int v_vect = (173/(a));
+			int v_vect = (height/(a));
 			int v_start = v_vect/2;
 			Cell cell; Grain grain;
 			Random rand = new Random();
@@ -335,20 +344,20 @@ public class Area {
 					cell.setGrain(grain);
 					cell.on();
 				}
-			v_vect = (173/(c));
+			v_vect = (height/(c));
 			v_start = v_vect/2;
 			for (int j=0;j<c;j++){
 				cell = getCellAt(h_start+h_vect*a,v_start+j*v_vect);
 				grain = new Grain();
-				grain.setIdGrain(a*a+j); //chyba OK
+				grain.setIdGrain(a*a+j); //
 				grain.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));
 				cell.setGrain(grain);
 				cell.on();
 			}
 		} else {
-			int h_vect = (int)(173/(a));
+			int h_vect = (int)(width/(a));
 			int h_start = h_vect/2;
-			int v_vect = (173/(a));
+			int v_vect = (height/(a));
 			int v_start = v_vect/2;
 			Cell cell; Grain grain;
 			Random rand = new Random();
@@ -367,14 +376,13 @@ public class Area {
 		}
 	}
 	
-	public void setHeight(int height) {
-		this.height = height;
-	}
 
 
-	public void setWidth(int width) {
-		this.width = width;
+	public void setDimensions(int width, int height) {
+		this.width = width; this.height = height;
+		this.reInitializeCells();
 	}
+	
 	public void initializeCells(){
 		tab = new Cell[height][width];
 		for (int i=0;i<height;i++){

@@ -59,7 +59,7 @@ public class MainWindow extends JFrame {
 	private Area a; JComboBox bcScroll; 
 	JComboBox algorythmBox; JComboBox genTypeBox;
 	JLabel grainLabel;
-	private JButton btnRealtimesimulation;
+	JButton btnRealtimesimulation;
 	private JPanel rightSidePanel;
 	JScrollBar numberOfGrainsScrollBar;
 	JLabel randomGrainsNumber;
@@ -85,7 +85,7 @@ public class MainWindow extends JFrame {
 		contentPane.setLayout(null);
 		cellGrid = new CellsViewModel(a,this);
 		cellGrid.setDoubleBuffered(false);
-		cellGrid.setBounds(198, 10, 519, 519);
+		cellGrid.setBounds(198, 10, 521, 521);
 		contentPane.add(cellGrid);
 		cellGrid.setPreferredSize(new Dimension(500, 500));
 		cellGrid.setLayout(new GridBagLayout());

@@ -13,6 +13,7 @@ public class GameOfLife extends MyAlgorythm {
 	}
 	
 	public boolean step(){
+		height=a.getHeight(); width=a.getWidth();
 		Cell[][] prev = a.getCellularCopy();
 		int ii = 0; int jj = 0; int iii = 0; int jjj = 0;
 		int neighbours = 0;

@@ -14,6 +14,7 @@ public class NaiveGrainGrowth extends MyAlgorythm {
 	}
 
 	public boolean step(){
+		height=a.getHeight(); width=a.getWidth();
 		boolean last = true; 
 		Cell[][] prev = a.getCellularCopy();
 		//int ii = 0; int jj = 0; int iii = 0; int jjj = 0;
