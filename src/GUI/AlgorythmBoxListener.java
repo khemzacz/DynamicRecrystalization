@@ -18,12 +18,14 @@ public class AlgorythmBoxListener implements ActionListener {
 			w.initializeCells();
 			w.cellGrid.getCellsFromArea();
 			w.cellGrid.setGameOfLife();
+			w.btnSpawnGliderGun.setEnabled(true);
 		}
 		else if (choice.equals("NaiveGrainGrowth")){
 			w.generateGrainsBtn.setEnabled(true);
 			w.initializeCells();
 			w.cellGrid.getCellsFromArea();
 			w.cellGrid.setNaiveGrainGrowth();
+			w.btnSpawnGliderGun.setEnabled(false);
 		}
 	}
 }
