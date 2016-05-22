@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import Algorythms.EdgeGrainDetection;
 import Algorythms.GameOfLife;
 import Algorythms.MyAlgorythm;
 import Algorythms.NaiveGrainGrowth;
@@ -83,7 +84,7 @@ public class Area {
 		Cell[][] pom = new Cell[height][width];
 		for (int i=0;i<height;i++){
 			for (int j=0;j<width;j++){
-				pom[i][j] = new Cell(i,j); // Here i lose grains from algorythm
+				pom[i][j] = new Cell(i,j); 
 				if (this.tab[i][j].isAlive())
 					pom[i][j].on();
 					pom[i][j].setGrain(this.tab[i][j].getGrain());
@@ -478,6 +479,11 @@ public class Area {
 				}
 			}
 		}
+		
+	}
+
+	public void setDetectEdges() {
+		algorythm=new EdgeGrainDetection(this);
 		
 	}
 }

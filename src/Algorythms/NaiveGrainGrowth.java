@@ -21,11 +21,11 @@ public class NaiveGrainGrowth extends MyAlgorythm {
 		for (int i = 0; i < height; i++)
 			for (int j = 0; j < width;j++) //pêtla po komórkach
 			{
-				if(prev[i][j].isAlive())
+				if(prev[i][j].isAlive()) // If current cell has grown skip iteration
 					continue; 
 				Cell tmp = a.getCellAt(i, j);
 				tmp.setGrain(ngbh.determineGrain(prev, i, j));
-				last = false;
+				last = false; // last iteration will never get here thus we will return true later on.
 				if(tmp.getGrain() != null){
 					tmp.on();
 				}

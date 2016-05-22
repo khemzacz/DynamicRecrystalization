@@ -121,7 +121,7 @@ public class MainWindow extends JFrame {
 		panel.add(bcScroll);
 		
 		ArrayList<String> pom2 = new ArrayList<String>();
-		pom2.add("GameOfLife");	pom2.add("NaiveGrainGrowth");
+		pom2.add("GameOfLife");	pom2.add("NaiveGrainGrowth"); pom2.add("DetectEdges");
 		String[] algorythms = new String [pom2.size()];
 		listData = pom2.toArray(algorythms);
 		algorythmBox = new JComboBox(listData);	algorythmBox.setBounds(0, 150, 156, 22); algorythmBox.addActionListener(new AlgorythmBoxListener(this));
@@ -227,6 +227,4 @@ public class MainWindow extends JFrame {
 		a.initializeCells();
 		
 	}
-	
-	
 }

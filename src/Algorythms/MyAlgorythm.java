@@ -9,9 +9,7 @@ public abstract class MyAlgorythm {
 		this.ngbh = new Moore(a);
 	}
 	
-	public boolean step(){
-		return true;
-	}
+	public abstract boolean step();
 	public void steps(int n){
 		for(int i =0;i<n;i++){
 			step();

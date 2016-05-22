@@ -29,10 +29,14 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 	private int distance; private int speed;
 	private ArrayList<Cell> cells; private Lock l;
 	Area a;
-	private boolean shutdown; private boolean extShutdown;
+	private boolean shutdown; private boolean extShutdown; private boolean grownGrains;
 	
+	public boolean isGrownGrains() {
+		return grownGrains;
+	}
+
 	public CellsViewModel(Area a, MainWindow w){
-		shutdown=true; extShutdown = true;
+		shutdown=true; extShutdown = true; grownGrains= false;
 		this.w=w; size=3;
 		self = this;
 		cells = new ArrayList<Cell>();
@@ -54,6 +58,7 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 	public void run() {
 		while(!(shutdown || extShutdown)){
 			shutdown = a.step();
+			grownGrains = shutdown; // dataReady - if Grains are Grown we can use recrystalization
 			try {
 				Thread.sleep(speed);
 			} catch (InterruptedException e) {
@@ -199,6 +204,7 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 	}
 
 	public void clearTheArea() {
+		grownGrains = false;
 		for (Cell cell:cells)
 		{
 			cell.nullifyGrain();
@@ -273,6 +279,11 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 
 	public void setExtShutDown(boolean extShutDown) {
 		this.extShutdown = extShutDown;
+	}
+
+	public void setDetectEdges() {
+		a.setDetectEdges();
+		
 	}
 	
 }

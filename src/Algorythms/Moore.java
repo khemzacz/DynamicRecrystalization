@@ -47,7 +47,6 @@ public class Moore extends Neighbourhood{
 					pom = tab[iii][jjj].getGrain();
 				}
 				else{
-					//System.out.println("dead neighbour ");
 					continue;
 				}
 

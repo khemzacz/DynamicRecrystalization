@@ -12,16 +12,20 @@ public class Cell {
 	private int i=0; private int j=0;
 	private Grain grain;
 	private boolean inRadius;
+	private boolean edge;
+
+
 	public Cell(int i, int j){
-		alive=false;
-		grain=null;
+		this.alive=false;
+		this.grain=null;
+		this.edge = false;
 		this.i=i; this.j=j;
 	}
 	
 	public Cell(Cell cell) {
 		this.i=cell.i;
 		this.j=cell.j;
-		this.alive = cell.alive;
+		this.alive = cell.alive; this.edge = false;
 		this.grain=cell.copyGrain();
 	}
 
@@ -90,6 +94,14 @@ public class Cell {
 
 	public void setInRadius(boolean inRadius) {
 		this.inRadius = inRadius;
+	}
+
+	public void setEdge(boolean b) {
+		this.edge=b;
+	}
+	
+	public boolean isEdge() {
+		return edge;
 	}
 
 }
