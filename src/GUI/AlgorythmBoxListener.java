@@ -47,10 +47,10 @@ public class AlgorythmBoxListener implements ActionListener {
 		else if (choice.equals("StaticRecrystalization")){
 			
 			//w.initializeCells();
-			if (!w.cellGrid.isGrownGrains()){
-				JOptionPane.showMessageDialog(w, "You can't recrystalize without input.");
-				return;
-			}
+			//if (!w.cellGrid.isGrownGrains()){
+			//	JOptionPane.showMessageDialog(w, "You can't recrystalize without input.");
+			//	return;
+			//}
 			w.generateGrainsBtn.setEnabled(false);
 			w.btnRealtimesimulation.setEnabled(false);
 			w.cellGrid.setStaticRecrystalization();

@@ -1,26 +1,68 @@
 package Algorythms;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import mainPackage.Area;
 import mainPackage.Cell;
 
 public class StaticRecrystalization extends MyAlgorythm {
-	private boolean firstStep;
+	private boolean firstStep; private double GlobalDislocationDensity; private double A=86710969050178.5; private double B=9.41268203527779;
+	private double ro; private double deltaT = 0.001; private double time=0; private File file; private FileWriter writer;
+	private double prevRo; private double deltaRo; private double roOfCell; private int width; private int height;
 	public StaticRecrystalization(Area a) {
 		super(a);
 		this.firstStep = true;
+		this.width = a.getWidth(); this.height = a.getHeight();
 	}
 
 	@Override
 	public boolean step() {
-		if (firstStep)
-			detectEdges();
-		
-		
-		
+		if (firstStep){
+			detectEdges();// marks if edge of grain
+			try {
+			    file = new File("GlobalDislocationDensity.txt");
+				writer = new FileWriter(file);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			
+			firstStep=false;
+		} else{
+			
+			ro = calculateGlobalDislocationDensity(time); 
+			time = time+deltaT;
+			deltaRo = prevRo-ro;
+			roOfCell = deltaRo/(height*width);
+			
+			try {
+				writer.write("\ntime: "+time+"\t"+"ro: "+ro);
+				writer.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+			
+
+			
 		
 		
 		
 		return false;
+	}
+
+	private double calculateGlobalDislocationDensity(double t) {
+		return A/B + (1 - A/B)  * Math.exp(-B*t);
+		
 	}
 
 	@Override
