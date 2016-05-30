@@ -285,5 +285,10 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 		a.setDetectEdges();
 		
 	}
+
+	public void setStaticRecrystalization() {
+		a.setStaticRecrystalization();
+		
+	}
 	
 }

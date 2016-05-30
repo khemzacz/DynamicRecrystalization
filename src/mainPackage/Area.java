@@ -11,6 +11,7 @@ import Algorythms.GameOfLife;
 import Algorythms.MyAlgorythm;
 import Algorythms.NaiveGrainGrowth;
 import Algorythms.Neighbourhood;
+import Algorythms.StaticRecrystalization;
 
 public class Area {
 	private Cell[][] tab;
@@ -484,6 +485,11 @@ public class Area {
 
 	public void setDetectEdges() {
 		algorythm=new EdgeGrainDetection(this);
+		
+	}
+
+	public void setStaticRecrystalization() {
+		algorythm = new StaticRecrystalization(this);
 		
 	}
 }
