@@ -108,7 +108,7 @@ public class StaticRecrystalization extends MyAlgorythm {
 			}
 			//*********GrowthOfRecrystalizedGrainsBelow*********
 			prev = a.getCellularCopy();
-			last=false;
+			//last=false;
 			//int ii = 0; int jj = 0; int iii = 0; int jjj = 0;
 			for (int i = 0; i < height; i++)
 				for (int j = 0; j < width;j++) //pêtla po komórkach
@@ -121,7 +121,7 @@ public class StaticRecrystalization extends MyAlgorythm {
 						tmp1.setGrain(grain);
 						tmp1.setRecrystalized(true);
 					}
-					
+					last=false;
 					
 					
 				}
