@@ -28,7 +28,7 @@ public class StaticRecrystalization extends MyAlgorythm {
 			{
 				a.getCellAt(i, j).setRecrystalized(false);
 			}
-		this.prevRo=0;
+		this.prevRo=0; this.deltaRo=0;
 	}
 
 	@Override
@@ -79,9 +79,13 @@ public class StaticRecrystalization extends MyAlgorythm {
 					}
 				}	
 			}
-			double remainingRoOfEdgeCell = ro/(cellsOnTheEdge.size());	
-			int pom=0;
-			for (Cell cell : cellsOnTheEdge){
+			int randomCellsOnEdgeAmount = rand.nextInt(cellsOnTheEdge.size());
+			double remainingRoOfEdgeCell = deltaRo/(randomCellsOnEdgeAmount);	
+			int pom=0; int tmp=0;
+			for (int i=0;i<randomCellsOnEdgeAmount;i++){
+				tmp =rand.nextInt(cellsOnTheEdge.size());
+				Cell cell = cellsOnTheEdge.get(tmp);
+				cellsOnTheEdge.remove(tmp);
 				pom = rand.nextInt(2);
 				if (pom==1){
 					cell.addDislocationDensity(remainingRoOfEdgeCell);
@@ -111,11 +115,11 @@ public class StaticRecrystalization extends MyAlgorythm {
 				{
 					if(prev[i][j].isRecrystalized()) // If current cell has grown skip iteration
 						continue; 
-					Cell tmp = a.getCellAt(i, j);
+					Cell tmp1 = a.getCellAt(i, j);
 					Grain grain = ngbh.determineGrain(prev, i, j);
 					if(grain != null){
-						tmp.setGrain(grain);
-						tmp.setRecrystalized(true);
+						tmp1.setGrain(grain);
+						tmp1.setRecrystalized(true);
 					}
 					
 					
