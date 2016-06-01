@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
 
 import mainPackage.Area;
 import mainPackage.Cell;
@@ -14,11 +16,10 @@ import mainPackage.Cell;
 public class StaticRecrystalization extends MyAlgorythm {
 	private boolean firstStep; private double GlobalDislocationDensity; private double A=86710969050178.5; private double B=9.41268203527779;
 	private double ro; private double deltaT = 0.001; private double time=0; private File file; private FileWriter writer;
-	private double prevRo; private double deltaRo; private double roOfCell; private int width; private int height;
+	private double prevRo; private double deltaRo; private double roOfCell; private Cell[][] prev;
 	public StaticRecrystalization(Area a) {
 		super(a);
 		this.firstStep = true;
-		this.width = a.getWidth(); this.height = a.getHeight();
 	}
 
 	@Override
@@ -30,25 +31,58 @@ public class StaticRecrystalization extends MyAlgorythm {
 				writer = new FileWriter(file);
 				
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println("Failed creating a file");
 			}
 			
 			
 			firstStep=false;
 		} else{
-			
+			//*********Aka dislocation cannon*********//
+			double width = a.getWidth(); double height = a.getHeight(); Random rand = new Random();
 			ro = calculateGlobalDislocationDensity(time); 
-			time = time+deltaT;
-			deltaRo = prevRo-ro;
-			roOfCell = deltaRo/(height*width);
-			
+			// Ro to file
 			try {
 				writer.write("\ntime: "+time+"\t"+"ro: "+ro);
 				writer.flush();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
+			time = time+deltaT;
+			deltaRo = prevRo-ro;
+			roOfCell = deltaRo/(height*width);
+			prev = a.getCellularCopy();
+			ArrayList<Cell> cellsOnTheEdge = new ArrayList<Cell>();
+			for(int i=0;i<width;i++){
+				for(int j=0;j<height;j++){
+					Cell cell = a.getCellAt(i, j);
+					if (cell.isEdge()){
+						cell.addDislocationDensity(roOfCell*0.8);
+						ro-=roOfCell*0.8;
+						cellsOnTheEdge.add(cell);
+					}
+					else {
+						cell.addDislocationDensity(roOfCell*0.2);
+						ro-=roOfCell*0.2;
+					}
+				}	
+			}
+			double remainingRoOfEdgeCell = ro/(cellsOnTheEdge.size());	
+			int pom=0;
+			for (Cell cell : cellsOnTheEdge){
+				pom = rand.nextInt(1);
+				if (pom==1){
+					cell.addDislocationDensity(remainingRoOfEdgeCell);
+				}
+			}
+			//******RecrystalizationBelow*******
+			double criticalDislocationDensity=4215840142323.42/(height*width);
+			for(int i=0;i<width;i++){
+				for(int j=0;j<height;j++){
+					Cell cell = a.getCellAt(i, j);
+					
+				}	
+			}
+			
+
 		}
 
 			

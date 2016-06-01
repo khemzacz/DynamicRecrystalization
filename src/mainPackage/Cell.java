@@ -13,13 +13,16 @@ public class Cell {
 	private Grain grain;
 	private boolean inRadius;
 	private boolean edge;
-
+	private double roOfCell;
+	private boolean recrystalized;
 
 	public Cell(int i, int j){
 		this.alive=false;
 		this.grain=null;
 		this.edge = false;
 		this.i=i; this.j=j;
+		this.roOfCell=0.0;
+		this.setRecrystalized(false);
 	}
 	
 	public Cell(Cell cell) {
@@ -27,6 +30,8 @@ public class Cell {
 		this.j=cell.j;
 		this.alive = cell.alive; this.edge = false;
 		this.grain=cell.copyGrain();
+		this.roOfCell=cell.roOfCell;
+		this.recrystalized=cell.recrystalized;
 	}
 
 	private Grain copyGrain() {
@@ -102,6 +107,23 @@ public class Cell {
 	
 	public boolean isEdge() {
 		return edge;
+	}
+
+	public void addDislocationDensity(double d) {
+		roOfCell+=d;
+		
+	}
+
+	public double getRoOfCell() {
+		return roOfCell;
+	}
+
+	public boolean isRecrystalized() {
+		return recrystalized;
+	}
+
+	public void setRecrystalized(boolean recrystalized) {
+		this.recrystalized = recrystalized;
 	}
 
 }
