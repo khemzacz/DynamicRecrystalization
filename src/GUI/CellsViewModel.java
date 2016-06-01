@@ -209,6 +209,7 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 		{
 			cell.nullifyGrain();
 			cell.off();
+			cell.setRecrystalized(true);
 		}
 		repaint();
 		

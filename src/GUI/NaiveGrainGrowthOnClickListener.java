@@ -31,7 +31,7 @@ public class NaiveGrainGrowthOnClickListener implements MouseListener{
 		else{
 			Grain grain = new Grain();
 			Random rand = new Random();
-			grain.setIdGrain(grain.getGrainsSize());
+			//grain.setIdGrain(grain.getGrainsSize());
 			grain.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));
 			cell.setGrain(grain);
 			cell.on();

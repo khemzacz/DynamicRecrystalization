@@ -12,19 +12,30 @@ import java.util.Random;
 
 import mainPackage.Area;
 import mainPackage.Cell;
+import mainPackage.Grain;
 
 public class StaticRecrystalization extends MyAlgorythm {
 	private boolean firstStep; private double GlobalDislocationDensity; private double A=86710969050178.5; private double B=9.41268203527779;
 	private double ro; private double deltaT = 0.001; private double time=0; private File file; private FileWriter writer;
-	private double prevRo; private double deltaRo; private double roOfCell; private Cell[][] prev;
+	private double prevRo; private double deltaRo; private double roOfCell; private Cell[][] prev; private double width; private double height;
+	private ArrayList<Cell> recrystalizedCells; private ArrayList<Cell> cellsOnTheEdge; private double criticalDislocationDensity;
 	public StaticRecrystalization(Area a) {
 		super(a);
 		this.firstStep = true;
+		this.width=a.getWidth(); this.height = a.getHeight();
+		for (int i = 0; i < height; i++)
+			for (int j = 0; j < width;j++) //pêtla po komórkach
+			{
+				a.getCellAt(i, j).setRecrystalized(false);
+			}
+		this.prevRo=0;
 	}
 
 	@Override
 	public boolean step() {
+		boolean last = true;
 		if (firstStep){
+			criticalDislocationDensity=4215840142323.42/(height*width);
 			detectEdges();// marks if edge of grain
 			try {
 			    file = new File("GlobalDislocationDensity.txt");
@@ -34,12 +45,14 @@ public class StaticRecrystalization extends MyAlgorythm {
 				System.out.println("Failed creating a file");
 			}
 			
-			
+			last=false;
 			firstStep=false;
-		} else{
+		} 
+		else{
 			//*********Aka dislocation cannon*********//
-			double width = a.getWidth(); double height = a.getHeight(); Random rand = new Random();
+			width = a.getWidth(); height = a.getHeight(); Random rand = new Random();
 			ro = calculateGlobalDislocationDensity(time); 
+			
 			// Ro to file
 			try {
 				writer.write("\ntime: "+time+"\t"+"ro: "+ro);
@@ -47,10 +60,11 @@ public class StaticRecrystalization extends MyAlgorythm {
 			} catch (IOException e) {
 			}
 			time = time+deltaT;
-			deltaRo = prevRo-ro;
+			deltaRo = ro-prevRo;
+			prevRo=ro;
 			roOfCell = deltaRo/(height*width);
-			prev = a.getCellularCopy();
-			ArrayList<Cell> cellsOnTheEdge = new ArrayList<Cell>();
+			//prev = a.getCellularCopy();
+			cellsOnTheEdge = new ArrayList<Cell>();
 			for(int i=0;i<width;i++){
 				for(int j=0;j<height;j++){
 					Cell cell = a.getCellAt(i, j);
@@ -68,30 +82,56 @@ public class StaticRecrystalization extends MyAlgorythm {
 			double remainingRoOfEdgeCell = ro/(cellsOnTheEdge.size());	
 			int pom=0;
 			for (Cell cell : cellsOnTheEdge){
-				pom = rand.nextInt(1);
+				pom = rand.nextInt(2);
 				if (pom==1){
 					cell.addDislocationDensity(remainingRoOfEdgeCell);
 				}
 			}
 			//******RecrystalizationBelow*******
-			double criticalDislocationDensity=4215840142323.42/(height*width);
+			recrystalizedCells = new ArrayList<Cell>();
+			
 			for(int i=0;i<width;i++){
 				for(int j=0;j<height;j++){
 					Cell cell = a.getCellAt(i, j);
-					
+					if (cell.getRoOfCell()>criticalDislocationDensity && !cell.isRecrystalized()){
+						
+						cell.recrystalize();
+					}
+					if (cell.isRecrystalized()){
+						recrystalizedCells.add(cell);
+					}
 				}	
 			}
+			//*********GrowthOfRecrystalizedGrainsBelow*********
+			prev = a.getCellularCopy();
+			last=false;
+			//int ii = 0; int jj = 0; int iii = 0; int jjj = 0;
+			for (int i = 0; i < height; i++)
+				for (int j = 0; j < width;j++) //pêtla po komórkach
+				{
+					if(prev[i][j].isRecrystalized()) // If current cell has grown skip iteration
+						continue; 
+					Cell tmp = a.getCellAt(i, j);
+					Grain grain = ngbh.determineGrain(prev, i, j);
+					if(grain != null){
+						tmp.setGrain(grain);
+						tmp.setRecrystalized(true);
+					}
+					
+					
+					
+				}
+
 			
 
+		
 		}
+		return last;
 
 			
-
-			
 		
 		
 		
-		return false;
 	}
 
 	private double calculateGlobalDislocationDensity(double t) {

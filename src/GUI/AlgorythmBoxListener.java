@@ -52,7 +52,7 @@ public class AlgorythmBoxListener implements ActionListener {
 			//	return;
 			//}
 			w.generateGrainsBtn.setEnabled(false);
-			w.btnRealtimesimulation.setEnabled(false);
+			w.btnRealtimesimulation.setEnabled(true);
 			w.cellGrid.setStaticRecrystalization();
 			w.btnSpawnGliderGun.setEnabled(false);
 			

@@ -42,7 +42,7 @@ public class Moore extends Neighbourhood{
 					if (ii < 0) continue;							
 				}
 
-				if (tab[iii][jjj].isAlive()) {
+				if (tab[iii][jjj].isAlive() && tab[iii][jjj].isRecrystalized()) {
 					//System.out.println("found alive neighbour ");
 					pom = tab[iii][jjj].getGrain();
 				}
@@ -79,6 +79,7 @@ public class Moore extends Neighbourhood{
 		}
 		if (tmp2.isEmpty())
 			return null;
+		
 		return tmp2.get(rand.nextInt(tmp2.size())); // Randomizing grain if equal ammount of neighbours
 	}
 

@@ -2,6 +2,7 @@ package mainPackage;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Random;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javax.swing.JPanel;
@@ -21,8 +22,8 @@ public class Cell {
 		this.grain=null;
 		this.edge = false;
 		this.i=i; this.j=j;
-		this.roOfCell=0.0;
-		this.setRecrystalized(false);
+		this.roOfCell=0;
+		this.setRecrystalized(true);
 	}
 	
 	public Cell(Cell cell) {
@@ -37,7 +38,7 @@ public class Cell {
 	private Grain copyGrain() {
 		Grain tmp = new Grain();
 		tmp.setGrainColor(this.grain.getGrainColor());
-		tmp.setIdGrain(this.grain.getIdGrain());
+		//tmp.setIdGrain(this.grain.getIdGrain());
 		return tmp;
 	}
 
@@ -122,8 +123,17 @@ public class Cell {
 		return recrystalized;
 	}
 
-	public void setRecrystalized(boolean recrystalized) {
-		this.recrystalized = recrystalized;
+	public void setRecrystalized(boolean rcd) {
+		this.recrystalized = rcd;
+	}
+
+	public void recrystalize() {
+		Random rand = new Random();
+		this.recrystalized=true;
+		Grain tmp = new Grain();
+		tmp.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));
+		this.grain = tmp;
+		
 	}
 
 }

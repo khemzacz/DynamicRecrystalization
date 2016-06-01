@@ -11,6 +11,7 @@ public class NaiveGrainGrowth extends MyAlgorythm {
 	public NaiveGrainGrowth(Area a) {
 		super(a);
 		height=a.getHeight(); width=a.getWidth();
+
 	}
 
 	public boolean step(){

@@ -89,6 +89,8 @@ public class Area {
 				if (this.tab[i][j].isAlive())
 					pom[i][j].on();
 					pom[i][j].setGrain(this.tab[i][j].getGrain());
+					pom[i][j].setRecrystalized(this.tab[i][j].isRecrystalized());
+					pom[i][j].setEdge(this.tab[i][j].isEdge());
 			}			
 		}
 		return pom;
@@ -300,7 +302,7 @@ public class Area {
 			generated.add(result);
 			cell = getCellAt(j, k);
 			grain = new Grain();
-			grain.setIdGrain(i);
+			//grain.setIdGrain(i);
 			grain.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));
 			cell.setGrain(grain);
 			cell.on();
@@ -341,7 +343,7 @@ public class Area {
 					int pom1 = v_start+j*v_vect;
 					cell = getCellAt(pom,pom1);
 					grain = new Grain();
-					grain.setIdGrain(i*(a)+j); //chyba OK
+					//grain.setIdGrain(i*(a)+j); //chyba OK
 					grain.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));
 					cell.setGrain(grain);
 					cell.on();
@@ -351,7 +353,7 @@ public class Area {
 			for (int j=0;j<c;j++){
 				cell = getCellAt(h_start+h_vect*a,v_start+j*v_vect);
 				grain = new Grain();
-				grain.setIdGrain(a*a+j); //
+				//grain.setIdGrain(a*a+j); //
 				grain.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));
 				cell.setGrain(grain);
 				cell.on();
@@ -369,7 +371,7 @@ public class Area {
 					int pom1 = v_start+j*v_vect;
 					cell = getCellAt(pom,pom1);
 					grain = new Grain();
-					grain.setIdGrain(i*(a)+j); //chyba OK
+					//grain.setIdGrain(i*(a)+j); //chyba OK
 					grain.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));
 					cell.setGrain(grain);
 					cell.on();
@@ -425,7 +427,7 @@ public class Area {
 				pom=cells.size();
 				cell = cells.get(rand.nextInt(pom));
 				grain = new Grain();
-				grain.setIdGrain(id);
+				//grain.setIdGrain(id);
 				grain.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));
 				cell.setGrain(grain);
 				cell.setInRadius(true);
@@ -438,7 +440,7 @@ public class Area {
 				pom=cells.size();
 				cell = cells.get(rand.nextInt(pom));
 				grain = new Grain();
-				grain.setIdGrain(id);
+				//grain.setIdGrain(id);
 				grain.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));
 				cell.setGrain(grain);
 				cell.setInRadius(true);
