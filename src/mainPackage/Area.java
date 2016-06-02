@@ -8,6 +8,7 @@ import java.util.Random;
 
 import Algorythms.EdgeGrainDetection;
 import Algorythms.GameOfLife;
+import Algorythms.MonteCarlo;
 import Algorythms.MyAlgorythm;
 import Algorythms.NaiveGrainGrowth;
 import Algorythms.Neighbourhood;

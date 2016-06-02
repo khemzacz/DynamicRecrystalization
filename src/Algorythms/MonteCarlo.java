@@ -1,11 +1,11 @@
-package mainPackage;
+package Algorythms;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import Algorythms.MyAlgorythm;
-import Algorythms.Neighbourhood;
+import mainPackage.Area;
+import mainPackage.Grain;
 
 public class MonteCarlo extends MyAlgorythm {
 	private int width; private int height;
