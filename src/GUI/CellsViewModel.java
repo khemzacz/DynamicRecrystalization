@@ -294,5 +294,10 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 		a.setMonteCarlo();
 		
 	}
+
+	public void setMonteCarlo2() {
+		a.setMonteCarlo2();
+		
+	}
 	
 }

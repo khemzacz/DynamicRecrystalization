@@ -121,13 +121,13 @@ public class MainWindow extends JFrame {
 		panel.add(bcScroll);
 		
 		ArrayList<String> pom2 = new ArrayList<String>();
-		pom2.add("GameOfLife");	pom2.add("NaiveGrainGrowth");  pom2.add("StaticRecrystalization"); pom2.add("DetectEdges"); pom2.add("MonteCarlo");
+		pom2.add("GameOfLife");	pom2.add("NaiveGrainGrowth");  pom2.add("StaticRecrystalization"); pom2.add("DetectEdges"); pom2.add("MonteCarlo"); pom2.add("MonteCarlo2");
 		String[] algorythms = new String [pom2.size()];
 		listData = pom2.toArray(algorythms);
 		algorythmBox = new JComboBox(listData);	algorythmBox.setBounds(0, 150, 156, 22); algorythmBox.addActionListener(new AlgorythmBoxListener(this));
 		panel.add(algorythmBox);
 		
-		numberOfGrainsScrollBar = new JScrollBar();	numberOfGrainsScrollBar.setOrientation(JScrollBar.HORIZONTAL); numberOfGrainsScrollBar.setMinimum(2);
+		numberOfGrainsScrollBar = new JScrollBar();	numberOfGrainsScrollBar.setOrientation(JScrollBar.HORIZONTAL); numberOfGrainsScrollBar.setMinimum(0);
 		numberOfGrainsScrollBar.setValue(3); numberOfGrainsScrollBar.setBounds(0, 214, 185, 23); numberOfGrainsScrollBar.addAdjustmentListener(new NumberOfGrainsScrollBarListener(this));
 		panel.add(numberOfGrainsScrollBar);
 		

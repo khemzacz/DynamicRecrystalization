@@ -9,6 +9,7 @@ import java.util.Random;
 import Algorythms.EdgeGrainDetection;
 import Algorythms.GameOfLife;
 import Algorythms.MonteCarlo;
+import Algorythms.MonteCarlo2;
 import Algorythms.MyAlgorythm;
 import Algorythms.NaiveGrainGrowth;
 import Algorythms.Neighbourhood;
@@ -510,6 +511,11 @@ public class Area {
 
 	public boolean isGrownGrains() {
 		return grownGrains;
+	}
+
+	public void setMonteCarlo2() {
+		algorythm = new MonteCarlo2(this);
+		
 	}
 }
 

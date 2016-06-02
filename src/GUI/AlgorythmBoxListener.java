@@ -66,5 +66,17 @@ public class AlgorythmBoxListener implements ActionListener {
 			w.btnSpawnGliderGun.setEnabled(false);
 			
 		}
+		else if (choice.equals("MonteCarlo2")){
+			
+			if (!w.cellGrid.isGrownGrains()){
+				JOptionPane.showMessageDialog(w, "You can't MonteCarlo without input.");
+				return;
+			}
+			w.generateGrainsBtn.setEnabled(false);
+			w.btnRealtimesimulation.setEnabled(true);
+			w.cellGrid.setMonteCarlo2();
+			w.btnSpawnGliderGun.setEnabled(false);
+			
+		}
 	}
 }
