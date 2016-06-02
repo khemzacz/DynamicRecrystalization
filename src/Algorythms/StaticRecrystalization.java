@@ -145,7 +145,7 @@ public class StaticRecrystalization extends MyAlgorythm {
 
 	@Override
 	public void setNeighbourhood(Neighbourhood n) {
-		// TODO Auto-generated method stub
+		this.ngbh=n;
 
 	}
 

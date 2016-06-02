@@ -24,6 +24,7 @@ public class Area {
 	private boolean zeros=false;
 	private MyAlgorythm algorythm;
 	private int numberOfGrains=3;
+	private boolean grownGrains;
 	
 	
 	public Area(int width, int height){
@@ -35,6 +36,7 @@ public class Area {
 								
 			}			
 		}
+		this.grownGrains=false;
 		this.algorythm=new GameOfLife(this);
 	}
 	
@@ -493,6 +495,20 @@ public class Area {
 	public void setStaticRecrystalization() {
 		algorythm = new StaticRecrystalization(this);
 		
+	}
+
+	public void setMonteCarlo() {
+		algorythm = new MonteCarlo(this);
+		
+	}
+
+	public void setGrownGrains(boolean b) {
+		this.grownGrains=b;
+		
+	}
+
+	public boolean isGrownGrains() {
+		return grownGrains;
 	}
 }
 

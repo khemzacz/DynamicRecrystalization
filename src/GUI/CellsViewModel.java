@@ -27,16 +27,16 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 	private int lineThickness; private int size;
 	private int cellSize;
 	private int distance; private int speed;
-	private ArrayList<Cell> cells; private Lock l;
+	private ArrayList<Cell> cells;
 	Area a;
-	private boolean shutdown; private boolean extShutdown; private boolean grownGrains;
+	private boolean shutdown; private boolean extShutdown;
 	
 	public boolean isGrownGrains() {
-		return grownGrains;
+		return a.isGrownGrains();
 	}
 
 	public CellsViewModel(Area a, MainWindow w){
-		shutdown=true; extShutdown = true; grownGrains= false;
+		shutdown=true; extShutdown = true;
 		this.w=w; size=3;
 		self = this;
 		cells = new ArrayList<Cell>();
@@ -47,7 +47,6 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 		distance = lineThickness+cellSize;
 		this.a =a ;
 		getCellsFromArea();
-		l = new ReentrantLock();
 	}
 	
 	public void getCellsFromArea(){
@@ -58,7 +57,6 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 	public void run() {
 		while(!(shutdown || extShutdown)){
 			shutdown = a.step();
-			grownGrains = shutdown; // dataReady - if Grains are Grown we can use recrystalization
 			try {
 				Thread.sleep(speed);
 			} catch (InterruptedException e) {
@@ -139,17 +137,17 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		int x=0; int y=0; int iteration=1;
+		/*int x=0; int y=0; int iteration=1;
 		g.setColor(Color.red);
 		for(Cell cell : cells){
 			x = (distance*cell.getJ());
 			y = (distance*cell.getI());
 			iteration++;
-		}
+		}*/
 		
 		g.setColor(Color.RED);
-		x=0;y=0;
-		int line_length = (int) (Math.sqrt(cells.size()) *distance);
+		//x=0;y=0;
+		//int line_length = (int) (Math.sqrt(cells.size()) *distance);
 		int height = a.getHeight();
 		int width = a.getWidth();
 		Cell cell;
@@ -204,7 +202,7 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 	}
 
 	public void clearTheArea() {
-		grownGrains = false;
+		a.setGrownGrains(false);
 		for (Cell cell:cells)
 		{
 			cell.nullifyGrain();
@@ -289,6 +287,11 @@ public class CellsViewModel extends JPanel implements ComponentListener, MouseLi
 
 	public void setStaticRecrystalization() {
 		a.setStaticRecrystalization();
+		
+	}
+
+	public void setMonteCarlo() {
+		a.setMonteCarlo();
 		
 	}
 	

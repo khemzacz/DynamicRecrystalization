@@ -32,8 +32,6 @@ public class AlgorythmBoxListener implements ActionListener {
 			w.btnSpawnGliderGun.setEnabled(false);
 		}
 		else if (choice.equals("DetectEdges")){
-			
-			//w.initializeCells();
 			if (!w.cellGrid.isGrownGrains()){
 				JOptionPane.showMessageDialog(w, "You can't detected edges without input.");
 				return;
@@ -46,14 +44,25 @@ public class AlgorythmBoxListener implements ActionListener {
 		}
 		else if (choice.equals("StaticRecrystalization")){
 			
-			//w.initializeCells();
-			//if (!w.cellGrid.isGrownGrains()){
-			//	JOptionPane.showMessageDialog(w, "You can't recrystalize without input.");
-			//	return;
-			//}
+			if (!w.cellGrid.isGrownGrains()){
+				JOptionPane.showMessageDialog(w, "You can't recrystalize without input.");
+				return;
+			}
 			w.generateGrainsBtn.setEnabled(false);
 			w.btnRealtimesimulation.setEnabled(true);
 			w.cellGrid.setStaticRecrystalization();
+			w.btnSpawnGliderGun.setEnabled(false);
+			
+		}
+		else if (choice.equals("MonteCarlo")){
+			
+			if (!w.cellGrid.isGrownGrains()){
+				JOptionPane.showMessageDialog(w, "You can't MonteCarlo without input.");
+				return;
+			}
+			w.generateGrainsBtn.setEnabled(false);
+			w.btnRealtimesimulation.setEnabled(true);
+			w.cellGrid.setMonteCarlo();
 			w.btnSpawnGliderGun.setEnabled(false);
 			
 		}

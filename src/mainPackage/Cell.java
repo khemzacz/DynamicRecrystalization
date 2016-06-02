@@ -38,7 +38,7 @@ public class Cell {
 	private Grain copyGrain() {
 		Grain tmp = new Grain();
 		tmp.setGrainColor(this.grain.getGrainColor());
-		//tmp.setIdGrain(this.grain.getIdGrain());
+		tmp.setIdGrain(this.grain.getIdGrain());
 		return tmp;
 	}
 
@@ -86,12 +86,18 @@ public class Cell {
 	public void nullifyGrain(){
 		if(grain==null)
 			return;
-		grain.deleteGrain(); // removes from static ArrayList<Grain> grains
+		grain.removeCell(); // removes from static ArrayList<Grain> grains
 		grain=null;
 	}
 
 	public void setGrain(Grain grain2) {
+		if(grain!=null){
+			grain.removeCell();		
+		}
 		grain=grain2;
+		if(grain2!=null){
+			grain.addCell();
+		}
 	}
 
 	public boolean isInRadius() {
@@ -129,6 +135,9 @@ public class Cell {
 
 	public void recrystalize() {
 		Random rand = new Random();
+		grain.removeCell();
+		//grain.deleteGrain();
+		
 		this.recrystalized=true;
 		Grain tmp = new Grain();
 		tmp.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));
