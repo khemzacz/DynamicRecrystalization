@@ -18,7 +18,8 @@ public class StaticRecrystalization extends MyAlgorythm {
 	private boolean firstStep; private double GlobalDislocationDensity; private double A=86710969050178.5; private double B=9.41268203527779;
 	private double ro; private double deltaT = 0.001; private double time=0; private File file; private FileWriter writer;
 	private double prevRo; private double deltaRo; private double roOfCell; private Cell[][] prev; private double width; private double height;
-	private ArrayList<Cell> recrystalizedCells; private ArrayList<Cell> cellsOnTheEdge; private double criticalDislocationDensity;
+	private ArrayList<Cell> recrystalizedCells; private ArrayList<Cell> cellsOnTheEdge; private double criticalDislocationDensity; private double sumRo;
+	private double sigma=0;
 	public StaticRecrystalization(Area a) {
 		super(a);
 		this.firstStep = true;
@@ -28,7 +29,7 @@ public class StaticRecrystalization extends MyAlgorythm {
 			{
 				a.getCellAt(i, j).setRecrystalized(false);
 			}
-		this.prevRo=0; this.deltaRo=0;
+		this.prevRo=0; this.deltaRo=0; this.sumRo=0;
 	}
 
 	@Override
@@ -40,7 +41,7 @@ public class StaticRecrystalization extends MyAlgorythm {
 			try {
 			    file = new File("GlobalDislocationDensity.txt");
 				writer = new FileWriter(file);
-				
+				writer.write("t\tRo\tsumaRo");
 			} catch (IOException e) {
 				System.out.println("Failed creating a file");
 			}
@@ -53,16 +54,10 @@ public class StaticRecrystalization extends MyAlgorythm {
 			width = a.getWidth(); height = a.getHeight(); Random rand = new Random();
 			ro = calculateGlobalDislocationDensity(time); 
 			
-			// Ro to file
-			try {
-				writer.write("\ntime: "+time+"\t"+"ro: "+ro);
-				writer.flush();
-			} catch (IOException e) {
-			}
-			time = time+deltaT;
 			deltaRo = ro-prevRo;
 			prevRo=ro;
 			roOfCell = deltaRo/(height*width);
+			sigma=(1.9*0.000000000257*80000000000.0*Math.sqrt(ro));
 			//prev = a.getCellularCopy();
 			cellsOnTheEdge = new ArrayList<Cell>();
 			for(int i=0;i<width;i++){
@@ -70,27 +65,35 @@ public class StaticRecrystalization extends MyAlgorythm {
 					Cell cell = a.getCellAt(i, j);
 					if (cell.isEdge()){
 						cell.addDislocationDensity(roOfCell*0.8);
-						ro-=roOfCell*0.8;
+						deltaRo-=roOfCell*0.8;
 						cellsOnTheEdge.add(cell);
 					}
 					else {
 						cell.addDislocationDensity(roOfCell*0.2);
-						ro-=roOfCell*0.2;
+						deltaRo-=roOfCell*0.2;
 					}
 				}	
 			}
+			deltaRo=deltaRo/(width*height);
 			int randomCellsOnEdgeAmount = rand.nextInt(cellsOnTheEdge.size());
-			double remainingRoOfEdgeCell = deltaRo/(randomCellsOnEdgeAmount);	
+			double remainingRoOfEdgeCell = (sigma*deltaRo)/(randomCellsOnEdgeAmount);	
 			int pom=0; int tmp=0;
 			for (int i=0;i<randomCellsOnEdgeAmount;i++){
 				tmp =rand.nextInt(cellsOnTheEdge.size());
 				Cell cell = cellsOnTheEdge.get(tmp);
 				cellsOnTheEdge.remove(tmp);
-				pom = rand.nextInt(2);
-				if (pom==1){
+				//pom = rand.nextInt(2);
+				//if (pom==1){
 					cell.addDislocationDensity(remainingRoOfEdgeCell);
-				}
+				//}
 			}
+			// Ro to file
+			try {
+				writer.write("\n"+time+"\t"+prevRo+"\t"+(prevRo+remainingRoOfEdgeCell*randomCellsOnEdgeAmount));
+				writer.flush();
+			} catch (IOException e) {
+			}
+			
 			//******RecrystalizationBelow*******
 			recrystalizedCells = new ArrayList<Cell>();
 			
@@ -130,6 +133,7 @@ public class StaticRecrystalization extends MyAlgorythm {
 
 		
 		}
+		time = time+deltaT;
 		return last;
 
 			

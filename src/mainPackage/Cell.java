@@ -137,7 +137,7 @@ public class Cell {
 		Random rand = new Random();
 		grain.removeCell();
 		//grain.deleteGrain();
-		
+		this.setEdge(false);
 		this.recrystalized=true;
 		Grain tmp = new Grain();
 		tmp.setGrainColor(new Color(rand.nextInt(210)+35,rand.nextInt(210)+35,rand.nextInt(210)+35));
